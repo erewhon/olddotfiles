@@ -1,0 +1,17 @@
+#
+# Common shell aliases and functions.   These should work under both zsh and bash.
+#
+alias c=cd
+alias d=dirs
+alias p=pushd
+alias ,=popd
+alias s=ssh
+alias j=jobs
+
+gack() { ack -g $* }
+eack() { emacsclient -n $( ack -g $* ) }
+
+# http://stackoverflow.com/questions/714421/what-is-an-easy-way-to-do-a-sorted-diff-between-two-files
+function diffs() {
+        diff "${@:3}" <(sort "$1") <(sort "$2")
+}

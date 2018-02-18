@@ -1,6 +1,8 @@
 #
-# I use oh-my-zsh
+# Zsh config.   I lean on oh-my-zsh.
 #
+source ~/.shellrc
+
 export ZSH=$HOME/.oh-my-zsh
 
 #
@@ -12,6 +14,8 @@ export ZSH=$HOME/.oh-my-zsh
 
 # Turn on Powerline9k prompt in zsh with plenty o' bling, add custom font
 # for gratuitious icons.
+
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # https://gist.github.com/kevin-smets/8568070
 # git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
@@ -27,12 +31,9 @@ POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
 POWERLEVEL9K_SHORTEN_DELIMITER=""
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
 
-# POWERLEVEL9K_SHORTEN_STRATEGY="truncate_to_unique"
-# POWERLEVEL9K_SHORTEN_DIR_LENGTH=3    # Shorten path; useful for deep directories
 # Uncommenting the below will suppress my local user in the prompt.   However,
 #   when running Docker locally, it leads to Inception issues.  :-)
 # DEFAULT_USER="erewhon"
-ZSH_THEME="powerlevel9k/powerlevel9k"
 
 ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
@@ -40,25 +41,19 @@ HIST_STAMPS="yyyy-mm-dd"
 setopt AUTO_CD                       # You can just type a directory and CD there
 
 #
-# Let's make "less" and "man" a bit more colorful
-#   https://unix.stackexchange.com/questions/119/colors-in-man-pages
-#   (actually, used colored-man-pages zsh plugin)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 #
 
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-#  possible: pyenv
-#             battery
-
 # https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/jira
-# $JIRA_URL - Your JIRA instance's URL
-# $JIRA_NAME - Your JIRA username; used as the default user for assigned/reported searches
-# $JIRA_PREFIX - Prefix added to issue ID arguments
-# $JIRA_RAPID_BOARD - Set to true if you use Rapid Board
-# $JIRA_DEFAULT_ACTION - Action to do when jira is called with no arguments; defaults to "new"
+#   $JIRA_URL - Your JIRA instance's URL
+#   $JIRA_NAME - Your JIRA username; used as the default user for assigned/reported searches
+#   $JIRA_PREFIX - Prefix added to issue ID arguments
+#   $JIRA_RAPID_BOARD - Set to true if you use Rapid Board
+#   $JIRA_DEFAULT_ACTION - Action to do when jira is called with no arguments; defaults to "new"
 
 plugins=(ant
          cap
+         chucknorris
          colored-man-pages
          docker
          extract
@@ -71,7 +66,9 @@ plugins=(ant
          lein
          npm
          osx
+         perl
          repo
+         ssh-agent
          supervisor
          svn
          tmux
@@ -79,10 +76,9 @@ plugins=(ant
          zsh-autosuggestions   # Fish-like auto suggestions
         )
 
-#         ssh-agent
-# zstyle :omz:plugins:ssh-agent agent-forwarding on
-# zstyle :omz:plugins:ssh-agent id_rsa github_rsa hermes_id_rsa inet_rsa do_rsa
-#zstyle :omz:plugins:ssh-agent identities id_rsa inet_rsa
+#zstyle :omz:plugins:ssh-agent agent-forwarding on
+# Identities I need to find:  docker_do
+zstyle :omz:plugins:ssh-agent identities id_rsa
 
 # User configuration
 
@@ -109,13 +105,7 @@ if [ -d /usr/java/current ]; then
   export JAVA_HOME=/usr/java/current
 fi
 
-alias c=cd
-alias d=dirs
 alias e='emacsclient --no-wait --create-frame'
-alias p=pushd
-alias ,=popd
-alias s=ssh
-alias j=jobs
 alias gdh='git diff HEAD'
 alias mc='mc -x'
 
@@ -145,58 +135,28 @@ if [ -x /usr/bin/dircolors ]; then
     # https://www.hanselman.com/blog/SettingUpAShinyDevelopmentEnvironmentWithinLinuxOnWindows10.aspx
 fi
 
-gack() { ack -g $* }
-eack() { emacsclient -n $( ack -g $* ) }
-
-# disown command?
-#alias -g subl=subl
-
 setopt EXTENDED_HISTORY
-
-
-# http://stackoverflow.com/questions/714421/what-is-an-easy-way-to-do-a-sorted-diff-between-two-files
-function diffs() {
-        diff "${@:3}" <(sort "$1") <(sort "$2")
-}
 
 growl() { echo -e $'\e]9;'${1}'\007' ; return  ; }
 
 compdef _hosts asc
 compdef _hosts bsc
 
-#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
-
-#PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
-
 
 #
 # Node
 #
 export NODE_MODULES=/usr/local/share/npm/lib/node_modules
 
-# source $HOME/.rvm/scripts/rvm
-
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
 [[ -s "$HOME/.dotfiles-local/dotfiles/.zshrc" ]] && source "$HOME/.dotfiles-local/dotfiles/.zshrc"
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+[[ -e "${HOME}/.iterm2_shell_integration.zsh" ]]  && source "${HOME}/.iterm2_shell_integration.zsh"
 
 #
 # Syntax highlighting of command-line ala "fish"
@@ -210,7 +170,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 export LESS='-RMN'
 export LESSOPEN='|~/bin/lessfilter %s'
 
-#a
+#
 # Stuff to only run in interactive shells
 #
 if [[ -o login ]]; then
@@ -220,7 +180,4 @@ if [[ -o login ]]; then
         neofetch
 
     # neofetch --size 25% --iterm2 ~/Documents/Pictures/Self/horsing_around.jpg
-
 fi
-export PATH="/usr/local/opt/e2fsprogs/bin:$PATH"
-export PATH="/usr/local/opt/e2fsprogs/sbin:$PATH"

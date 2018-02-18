@@ -1,13 +1,7 @@
 #
-# 
+# Bash config.
 #
-alias c=cd
-alias d=dirs
-alias p=pushd
-alias ,=popd
-alias s=ssh
-alias j=jobs
-alias e=emacs
+source ~/.shellrc
 
 #
 # Host completion
@@ -21,6 +15,7 @@ fi
 # make lein not use cert
 #
 export HTTP_CLIENT="wget --no-check-certificate -O"
+
 
 export PS1='\u@\h \w $ '
 
