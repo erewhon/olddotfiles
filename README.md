@@ -31,5 +31,12 @@ I try to recover some ancient things I used to do.
 - Install zsh
 - Install oh-my-zsh (which changes default shell)
 - Install Emacs from homebrew cask
+- Git
 
 ## Linux
+
+- Git
+
+# Things Remaining
+
+https://www.jetbrains.com/help/idea/exporting-and-importing-settings.html

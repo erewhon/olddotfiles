@@ -85,6 +85,6 @@
 
 (setq custom-file "~/.emacs.custom")
 
-(org-babel-load-file "~/.dotfiles/dotfiles/elisp.org")
+(org-babel-load-file "~/.emacs.d/elisp.org")
 
 ;;; .emacs ends here
