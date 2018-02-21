@@ -15,6 +15,9 @@ export ZSH=$HOME/.oh-my-zsh
 # Turn on Powerline9k prompt in zsh with plenty o' bling, add custom font
 # for gratuitious icons.
 
+# if it isnt there, try to clone it
+# git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # https://gist.github.com/kevin-smets/8568070

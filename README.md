@@ -34,6 +34,8 @@ I try to recover some ancient things I used to do.
 - Git
 - Install nerd fonts!
 - Install Karibiner
+- Pygmentize
+- brew install zsh-syntax-highlighting
 
 ## Linux
 

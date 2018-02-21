@@ -1,0 +1,36 @@
+{
+  "title": "Change f18 key",
+  "rules": [
+    {
+      "description": "Change f18 key to command+control+option+shift. (Post f18 key when pressed alone)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f18",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_shift",
+              "modifiers": [
+                "left_command",
+                "left_control",
+                "left_option"
+              ]
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "f18"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
