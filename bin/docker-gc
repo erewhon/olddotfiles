@@ -1,0 +1,10 @@
+#!/bin/bash
+# clean up thy dockerz!
+
+# clean up volumes
+
+docker volume rm $(docker volume ls -qf dangling=true)
+# docker volume ls -qf dangling=true | xargs -r docker volume rm
+
+# clean up images
+docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
