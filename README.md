@@ -32,6 +32,8 @@ I try to recover some ancient things I used to do.
 - Install oh-my-zsh (which changes default shell)
 - Install Emacs from homebrew cask
 - Git
+- Install nerd fonts!
+- Install Karibiner
 
 ## Linux
 
