@@ -8,8 +8,12 @@ alias ,=popd
 alias s=ssh
 alias j=jobs
 
-gack() { ack -g $* }
-eack() { emacsclient -n $( ack -g $* ) }
+function gack() { 
+  ack -g $* 
+}
+function eack() { 
+  emacsclient -n $( ack -g $* ) 
+}
 
 # http://stackoverflow.com/questions/714421/what-is-an-easy-way-to-do-a-sorted-diff-between-two-files
 function diffs() {
