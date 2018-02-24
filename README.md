@@ -36,6 +36,7 @@ I try to recover some ancient things I used to do.
 - Install Karibiner
 - Pygmentize
 - brew install zsh-syntax-highlighting
+- brew install pyenv pyenv-virtualenv pyenv-virtualenvwrapper
 
 ## Linux
 

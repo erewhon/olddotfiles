@@ -94,10 +94,10 @@ export MANPATH="/usr/local/man:$MANPATH"
 typeset -U path
 
 path=(~/bin
+      ~/bin/$( uname -s )
       ~/bin.local
       /usr/local/bin
       /usr/local/sbin
-      /usr/local/share/pypy
       $( go env GOPATH )/bin
       $path)
 
@@ -148,6 +148,17 @@ compdef _hosts bsc
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
 
 #
+# Better Python setup using Pyenv.  (Ala rvm from Ruby world)
+#    To see all versions available:  pyenv install -l
+#
+# export WORKON_HOME=~/.ve
+# mkdir -p $WORKON_HOME
+
+# eval "$( pyenv init - )"
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+
+
+#
 # Node
 #
 export NODE_MODULES=/usr/local/share/npm/lib/node_modules
@@ -184,3 +195,6 @@ if [[ -o login ]]; then
 
     # neofetch --size 25% --iterm2 ~/Documents/Pictures/Self/horsing_around.jpg
 fi
+
+#  if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
