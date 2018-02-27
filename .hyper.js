@@ -6,7 +6,7 @@ module.exports = {
     config: {
         // Choose either "stable" for receiving highly polished,
         // or "canary" for less polished but more frequent updates
-        updateChannel: 'stable',
+        updateChannel: 'canary',
         
         // default font size in pixels for all tabs
         fontSize: 12,
@@ -24,8 +24,9 @@ module.exports = {
         foregroundColor: '#fff',
 
         // terminal background color.  Adding transparency
-        backgroundColor: 'rgba(0,0,0,0.1)',
-        vibrancy: 'ultra-dark',
+        backgroundColor: '#000',
+        // backgroundColor: 'rgba(0,0,0,0.1)',
+        // vibrancy: 'ultra-dark',
 
         // border color (window, tabs)
         borderColor: '#333',
@@ -34,12 +35,13 @@ module.exports = {
         css: '',
 
         // custom css to embed in the terminal window
-        termCSS: `
-      x-screen x-row {
-        line-height: initial;
-        font-variant-ligatures: initial;
-      }
-    `,
+        termCSS: '',
+//        `
+//      x-screen x-row {
+//        line-height: initial;
+//        font-variant-ligatures: initial;
+//      }
+//    `,
 
         // set to `true` (without backticks) if you're using a Linux setup that doesn't show native menus
         // default: `false` on Linux, `true` on Windows (ignored on macOS)
@@ -51,8 +53,8 @@ module.exports = {
         showWindowControls: 'true',
 
         // custom padding (css format, i.e.: `top right bottom left`)
-        padding: '0px 7px',
-       // padding: '12px 14px',
+        // padding: '6px 7px',
+        padding: '12px 14px',
 
         // the full list. if you're going to provide the full color palette,
         // including the 6 x 6 color cubes and the grayscale map, just provide
@@ -112,8 +114,19 @@ module.exports = {
 
         // for advanced config flags please refer to https://hyper.is/#cfg
 
-        materialBox: {
-            scheme: 'material-palenight'
+        // hyper-material-box
+        //materialBox: {
+        //    scheme: 'material-palenight',
+        //    lightEffect: true,
+        //    backgroundOpacity: 0.8,
+        //    backgroundVibrancy: true
+        //},
+
+        // hyper-material-theme
+        MaterialTheme: {
+            theme: 'Palenight',
+            backgroundOpacity: '0.8',
+            vibrancy: 'ultra-dark'
         },
 
         hyperTabs: {
@@ -122,27 +135,41 @@ module.exports = {
             tabIcons: true,
             tabIconsColored: true,
             activityColor: '#ffa07a'
+        },
+
+        hyperBorder: {
+            animate: {
+                duration: '1s'
+            }
         }
     },
 
     // a list of plugins to fetch and install from npm
     plugins: [
-        'hyper-material-box',
-        'hyper-transparent',
+        //'hyper-material-box',
+        'hyper-material-theme',
+        //'hyper-transparent',  // no longer necessary
         'hyper-tabs-enhanced',
+        // 'hyper-dark-scrollbar',
+        // 'hyperline#0.6.1',    // Hyperline does not work on Windows, so skip it for now  This is for non-canary build
+        'hyperline',
+        'hyper-font-smoothing',
+        // 'hyperborder',
         // Fancy Git
         // 'gitrocket',
         // 'space-pull',
-        // Totally AWESOMENESS!!!1
-        'hypergravity',
-        // 'hyper-cat',
-        // 'hyper-cat-cursor',
-        // 'hyperpower'
+        //'hypergravity',
+        //'hyper-cat-cursor',
         // Other plugins
-        //    'hyperline#0.6.1',    // Hyperline does not work on Windows, so skip it for now
-        //    `hyper-mac-controls`
+        // `hyper-mac-controls`
         // todo:
         // visor or summon plugins
+        //'hypernasa'
+        //'hyperterm-retro'
+        //'hyper-giphy-stickers'
+        // Totally AWESOMENESS!!!1 (comment out the above)
+        //'hyper-cat',
+        //'hyperpower'
     ],
     
     // in development, you can create a directory under
