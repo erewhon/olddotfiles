@@ -11,6 +11,11 @@ if [[ -s "$HOME/.hosts" ]]; then
      complete -A hostname nc ping ssh s asc
 fi
 
+if [[ -d "$HOME/.pyenv" ]]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+fi
+
 #
 # make lein not use cert
 #
@@ -20,6 +25,7 @@ export HTTP_CLIENT="wget --no-check-certificate -O"
 export PS1='\u@\h \w $ '
 
 [[ -s "$HOME/.dotfiles.local/dotfiles/.bashrc" ]] && source "$HOME/.dotfiles.local/dotfiles/.bashrc"
+[[ -s "$HOME/.bashrc-local" ]] && source "$HOME/.bashrc-local"
 
 SSH_ENV_DIR="$HOME/.ssh/$HOSTNAME"
 SSH_ENV="$SSH_ENV_DIR/environment"
@@ -41,4 +47,11 @@ if [ -f "${SSH_ENV}" ]; then
     }
 else
     start_agent;
+fi
+
+#
+# If Pyenv exists, bootstrap it!
+#
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
 fi

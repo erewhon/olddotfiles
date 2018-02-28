@@ -114,19 +114,11 @@ module.exports = {
 
         // for advanced config flags please refer to https://hyper.is/#cfg
 
-        // hyper-material-box
-        //materialBox: {
-        //    scheme: 'material-palenight',
-        //    lightEffect: true,
-        //    backgroundOpacity: 0.8,
-        //    backgroundVibrancy: true
-        //},
-
         // hyper-material-theme
         MaterialTheme: {
             theme: 'Palenight',
-            backgroundOpacity: '0.8',
-            vibrancy: 'ultra-dark'
+            // backgroundOpacity: '0.85',
+            // vibrancy: 'ultra-dark'
         },
 
         hyperTabs: {
@@ -141,35 +133,38 @@ module.exports = {
             animate: {
                 duration: '1s'
             }
+        },
+
+        hypernasa: {
+            overlayOpacity: 0.5
         }
     },
 
     // a list of plugins to fetch and install from npm
     plugins: [
-        //'hyper-material-box',
         'hyper-material-theme',
-        //'hyper-transparent',  // no longer necessary
         'hyper-tabs-enhanced',
-        // 'hyper-dark-scrollbar',
-        // 'hyperline#0.6.1',    // Hyperline does not work on Windows, so skip it for now  This is for non-canary build
-        'hyperline',
+        'hyperline',                 // This does not work under Windows
         'hyper-font-smoothing',
-        // 'hyperborder',
+        //'hyperborder',
+        //
         // Fancy Git
+        //
         // 'gitrocket',
         // 'space-pull',
-        //'hypergravity',
-        //'hyper-cat-cursor',
+        //
         // Other plugins
+        //
         // `hyper-mac-controls`
-        // todo:
-        // visor or summon plugins
-        //'hypernasa'
+        'hypernasa',
         //'hyperterm-retro'
-        //'hyper-giphy-stickers'
+        //
         // Totally AWESOMENESS!!!1 (comment out the above)
         //'hyper-cat',
         //'hyperpower'
+        //'hypergravity',
+        //'hyper-cat-cursor',
+        //'hyper-giphy-stickers'
     ],
     
     // in development, you can create a directory under

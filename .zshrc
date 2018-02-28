@@ -151,11 +151,25 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 # Better Python setup using Pyenv.  (Ala rvm from Ruby world)
 #    To see all versions available:  pyenv install -l
 #
+# Versions to try
+#
+#    pyenv install 3.6.4
+#    pyenv 
+#
 # export WORKON_HOME=~/.ve
 # mkdir -p $WORKON_HOME
 
+if [[ -d "$HOME/.pyenv" ]]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+fi
+
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
+
 # eval "$( pyenv init - )"
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+# if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 
 #

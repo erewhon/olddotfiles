@@ -1,16 +1,20 @@
+# -*- Mode: shell-script -*-
 #
 # Common shell aliases and functions.   These should work under both zsh and bash.
 #
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ,=popd
 alias c=cd
 alias d=dirs
-alias p=pushd
-alias ,=popd
-alias s=ssh
 alias j=jobs
+alias p=pushd
+alias s=ssh
 
 function gack() { 
   ack -g $* 
 }
+
 function eack() { 
   emacsclient -n $( ack -g $* ) 
 }

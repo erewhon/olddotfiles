@@ -42,6 +42,13 @@ I try to recover some ancient things I used to do.
 
 - Git
 
+## Better Python
+
+Using Pyenv:
+
+- git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+
+
 # Things Remaining
 
 https://www.jetbrains.com/help/idea/exporting-and-importing-settings.html
