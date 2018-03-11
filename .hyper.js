@@ -136,7 +136,7 @@ module.exports = {
         },
 
         hypernasa: {
-            overlayOpacity: 0.5
+            overlayOpacity: 0.8
         }
     },
 
