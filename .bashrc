@@ -1,32 +1,106 @@
 #
+# Bash It
+#    git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
+#    ~/.bash_it/install.sh
+#
+# bash-it enable plugin proxy
+# bash-it enable alias ag emacs git npm systemd tmux yarn
+
+# BASH_IT_HTTP_PROXY
+# BASH_IT_HTTPS_PROXY
+
+export PATH="$HOME/bin:$PATH"
+
+#
+# If bash-it is available, use it.
+#
+if [[ -e ~/.bash_it.foo ]]; then
+    export BASH_IT="$HOME/.bash_it"
+    export BASH_IT_THEME='powerline-multiline'  # or bobby, redline?
+
+    # # powerline-multiline, powerline, redline
+    # Make Bash-it reload itself automatically after enabling or
+    # disabling aliases, plugins, and completions.
+    # export BASH_IT_AUTOMATIC_RELOAD_AFTER_CONFIG_CHANGE=1
+
+    export SCM_CHECK=true
+
+    # Load Bash It
+    source "$BASH_IT"/bash_it.sh
+else
+    #
+    # Append history as we go
+    #
+    PROMPT_COMMAND='history -a'
+    # PS1='$(if condition; then printf "\xe2\x9c\x93"; fi) $'
+
+    if command -v powerline-go 1>/dev/null 2>&1; then
+        function _update_ps1() {
+            PS1="$(powerline-go -colorize-hostname -error $?)"
+        }
+
+        if [ "$TERM" != "linux" ]; then
+            PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+        fi
+    else
+        PS1='\[\e[01;32m\]\[\e[1m\]\u@\h \[\e[36m\w\] \[\e[32m\]$(git branch 2>/dev/null | sed -n "s/* \(.*\)/\1 /p")\n\[\e[0m\]> \[\e[0m\]'
+    fi
+fi
+
+#
 # Bash config.
 #
 source ~/.shellrc
 
 #
-# Host completion
+# Complete better!
 #
+[[ -s /usr/share/bash-completion/bash_completion ]] && \
+    source /usr/share/bash-completion/bash_completion
+
 if [[ -s "$HOME/.hosts" ]]; then
-     export HOSTFILE=~/.hosts
-     complete -A hostname nc ping ssh s asc
+    export HOSTFILE=~/.hosts
+    complete -A hostname nc ping ssh s asc
 fi
-
-if [[ -d "$HOME/.pyenv" ]]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-fi
+#      29 complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
 
 #
-# make lein not use cert
+# Various settings
 #
-export HTTP_CLIENT="wget --no-check-certificate -O"
-
-
-export PS1='\u@\h \w $ '
-
-[[ -s "$HOME/.dotfiles.local/dotfiles/.bashrc" ]] && source "$HOME/.dotfiles.local/dotfiles/.bashrc"
+export IGNOREEOF=10
+ 
 [[ -s "$HOME/.bashrc-local" ]] && source "$HOME/.bashrc-local"
+ 
+unset MAILCHECK    # Don't check mail when opening terminal.
+# export IRC_CLIENT='irssi'
 
+#
+# Make our history (and navigation) great again.
+#
+shopt -s histappend                # append history 
+
+#
+# store more in total, exclude dups and other stuff, and timestamp
+#
+export HISTIGNORE="&:[bf]g:exit"
+export HISTCONTROL=ignoredups
+export HISTFILESIZE=1000000
+export HISTSIZE=1000000
+export HISTTIMEFORMAT="%F %T "
+
+shopt -s cdspell cmdhist
+
+# export CDPATH=.:~:~/src
+
+#
+# Better editor!
+#
+export EDITOR=emacs
+export VERSION_CONTROL=numbered
+
+#
+# ssh customization
+#
 SSH_ENV_DIR="$HOME/.ssh/$HOSTNAME"
 SSH_ENV="$SSH_ENV_DIR/environment"
 
@@ -38,7 +112,7 @@ function start_agent {
     . "${SSH_ENV}" > /dev/null
     /usr/bin/ssh-add;
 }
-
+ 
 # Source SSH settings, if applicable
 if [ -f "${SSH_ENV}" ]; then
     . "${SSH_ENV}" > /dev/null
@@ -48,10 +122,35 @@ if [ -f "${SSH_ENV}" ]; then
 else
     start_agent;
 fi
-
+ 
 #
 # If Pyenv exists, bootstrap it!
 #
+if [[ -d "$HOME/.pyenv" ]]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+fi
+
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
+fi
+ 
+#
+# make lein not use cert
+#
+export HTTP_CLIENT="wget --no-check-certificate -O"
+
+#
+# Bling
+#
+# [[ "$PS1" [[ && /usr/games/fortune | /usr/games/cowsay -n
+
+if [[ "$PS1" ]]; then
+    # Pimp my screen!
+    if command -v neofetch >/dev/null 2>&1; then
+        neofetch
+    # elif command -v cowsay >/dev/null 2>&1; then
+    #     fortune | cowsay
+    fi
+
 fi

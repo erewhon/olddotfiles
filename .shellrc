@@ -23,3 +23,7 @@ function eack() {
 function diffs() {
         diff "${@:3}" <(sort "$1") <(sort "$2")
 }
+
+function sumcount() {
+    sort | uniq -c | sort -n
+}
