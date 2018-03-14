@@ -112,13 +112,6 @@ alias e='emacsclient --no-wait --create-frame'
 alias gdh='git diff HEAD'
 alias mc='mc -x'
 
-#
-# Simple dotfile management, ala
-#      https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
-#
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-config config --local status.showUntrackedFiles no
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
