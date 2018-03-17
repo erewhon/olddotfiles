@@ -96,6 +96,7 @@ typeset -U path
 path=(~/bin
       ~/bin/$( uname -s )
       ~/bin.local
+      ~/.yarn/bin
       /usr/local/bin
       /usr/local/sbin
       $( go env GOPATH )/bin
@@ -170,6 +171,12 @@ fi
 #
 export NODE_MODULES=/usr/local/share/npm/lib/node_modules
 
+# nvm - manager for node.js
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -204,4 +211,8 @@ if [[ -o login ]]; then
 fi
 
 #  if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
+#
+# Language interpreter managers
+#
 
