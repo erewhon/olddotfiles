@@ -1,20 +1,43 @@
 #
-# Bash It
-#    git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
-#    ~/.bash_it/install.sh
+# First, we set up the PATH, plus any language virtualization shims
+#   (pyenv, nvm, etc).   We want to do this for both interactive
+#   and non-interactive scripts.
 #
-# bash-it enable plugin proxy
-# bash-it enable alias ag emacs git npm systemd tmux yarn
-
-# BASH_IT_HTTP_PROXY
-# BASH_IT_HTTPS_PROXY
 
 export PATH="$HOME/bin:$PATH"
 
 #
+# If Pyenv exists, bootstrap it!
+#
+if [[ -d "$HOME/.pyenv" ]]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+fi
+
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
+ 
+#
+# Non-interactive script, so stop at this point
+#
+[ -z "$PS1" ] && return
+
+#
 # If bash-it is available, use it.
 #
-if [[ -e ~/.bash_it.foo ]]; then
+if [[ -e ~/.bash_it ]]; then
+    #
+    # Bash It
+    #    git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
+    #    ~/.bash_it/install.sh
+    #
+    # bash-it enable plugin proxy
+    # bash-it enable alias ag emacs git npm systemd tmux yarn
+    #
+
+    # BASH_IT_HTTP_PROXY
+    # BASH_IT_HTTPS_PROXY
     export BASH_IT="$HOME/.bash_it"
     export BASH_IT_THEME='powerline-multiline'  # or bobby, redline?
 
@@ -90,8 +113,6 @@ export HISTTIMEFORMAT="%F %T "
 
 shopt -s cdspell cmdhist
 
-# export CDPATH=.:~:~/src
-
 #
 # Better editor!
 #
@@ -124,18 +145,6 @@ else
 fi
  
 #
-# If Pyenv exists, bootstrap it!
-#
-if [[ -d "$HOME/.pyenv" ]]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-fi
-
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-fi
- 
-#
 # make lein not use cert
 #
 export HTTP_CLIENT="wget --no-check-certificate -O"
@@ -145,12 +154,9 @@ export HTTP_CLIENT="wget --no-check-certificate -O"
 #
 # [[ "$PS1" [[ && /usr/games/fortune | /usr/games/cowsay -n
 
-if [[ "$PS1" ]]; then
-    # Pimp my screen!
-    if command -v neofetch >/dev/null 2>&1; then
-        neofetch
+# Pimp my screen!
+if command -v neofetch >/dev/null 2>&1; then
+    neofetch
     # elif command -v cowsay >/dev/null 2>&1; then
     #     fortune | cowsay
-    fi
-
 fi
