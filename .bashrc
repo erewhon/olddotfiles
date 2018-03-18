@@ -35,12 +35,12 @@ if [[ -e ~/.bash_it ]]; then
     # bash-it enable plugin proxy
     # bash-it enable alias ag emacs git npm systemd tmux yarn
     #
-
+    
     # BASH_IT_HTTP_PROXY
     # BASH_IT_HTTPS_PROXY
     export BASH_IT="$HOME/.bash_it"
-    export BASH_IT_THEME='powerline-multiline'  # or bobby, redline?
-
+    export BASH_IT_THEME='redline'
+    
     # # powerline-multiline, powerline, redline
     # Make Bash-it reload itself automatically after enabling or
     # disabling aliases, plugins, and completions.
