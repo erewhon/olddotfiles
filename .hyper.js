@@ -118,7 +118,7 @@ module.exports = {
         MaterialTheme: {
             theme: 'Palenight',
             // backgroundOpacity: '0.85',
-            // vibrancy: 'ultra-dark'
+            vibrancy: 'ultra-dark'
         },
 
         hyperTabs: {
@@ -145,6 +145,7 @@ module.exports = {
         'hyper-material-theme',
         'hyper-tabs-enhanced',
         'hyperline',                 // This does not work under Windows
+        //'hyper-statusline',
         'hyper-font-smoothing',
         //'hyperborder',
         //

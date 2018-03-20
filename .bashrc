@@ -3,7 +3,6 @@
 #   (pyenv, nvm, etc).   We want to do this for both interactive
 #   and non-interactive scripts.
 #
-
 export PATH="$HOME/bin:$PATH"
 
 #
@@ -18,6 +17,12 @@ if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
  
+#
+# nvm - manager for node.js
+#
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
+
 #
 # Non-interactive script, so stop at this point
 #

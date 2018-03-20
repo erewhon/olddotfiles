@@ -6,6 +6,60 @@ source ~/.shellrc
 export ZSH=$HOME/.oh-my-zsh
 
 #
+# Set up different languages
+#
+export GOPATH=$( go env GOPATH )
+export MANPATH="/usr/local/man:$MANPATH"
+
+# add elements to path, uniquely
+typeset -U path
+
+path=(~/bin
+      ~/bin/$( uname -s )
+      ~/bin.local
+      ~/.yarn/bin
+      /usr/local/bin
+      /usr/local/sbin
+      $( go env GOPATH )/bin
+      $path)
+
+#
+# Better Python setup using Pyenv.  (Ala rvm from Ruby world)
+#    To see all versions available:  pyenv install -l
+#
+# Versions to try
+#
+#    pyenv install 3.6.4
+#    pyenv 
+#
+# export WORKON_HOME=~/.ve
+# mkdir -p $WORKON_HOME
+
+if [[ -d "$HOME/.pyenv" ]]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+fi
+
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
+
+#  if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
+#
+# nvm - manager for node.js
+#
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
+
+###
+## OCaml
+###
+# OPAM configuration
+# [ -s "$HOME/.opam/opam-init/init.zsh" ] && \
+#   source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null || true
+
+#
 # It's the 21st century.  Why are our Unix terminals so boring?  Back
 # in the 1980s we had more colorful ANSI terminals.   Well, turns out we
 # *can* have color.  We just need to turn on the bling.   And thanks
@@ -87,22 +141,9 @@ zstyle :omz:plugins:ssh-agent identities id_rsa
 
 source $ZSH/oh-my-zsh.sh
 
-export GOPATH=$( go env GOPATH )
-export MANPATH="/usr/local/man:$MANPATH"
-
-# add elements to path, uniquely
-typeset -U path
-
-path=(~/bin
-      ~/bin/$( uname -s )
-      ~/bin.local
-      ~/.yarn/bin
-      /usr/local/bin
-      /usr/local/sbin
-      $( go env GOPATH )/bin
-      $path)
-
-export ALTERNATE_EDITOR=emacs EDITOR=emacsclient VISUAL=emacsclient
+export ALTERNATE_EDITOR=""
+export EDITOR="emacsclient -t"                  # $EDITOR should open in terminal
+export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI with non-daemon as alternate
 export VERSION_CONTROL=numbered
 
 if [ -d /usr/java/current ]; then
@@ -142,39 +183,10 @@ compdef _hosts bsc
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
 
 #
-# Better Python setup using Pyenv.  (Ala rvm from Ruby world)
-#    To see all versions available:  pyenv install -l
-#
-# Versions to try
-#
-#    pyenv install 3.6.4
-#    pyenv 
-#
-# export WORKON_HOME=~/.ve
-# mkdir -p $WORKON_HOME
-
-if [[ -d "$HOME/.pyenv" ]]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-fi
-
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-fi
-
-# eval "$( pyenv init - )"
-# if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-
-
-#
 # Node
 #
-export NODE_MODULES=/usr/local/share/npm/lib/node_modules
+# export NODE_MODULES=/usr/local/share/npm/lib/node_modules
 
-# nvm - manager for node.js
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # You may need to manually set your language environment
@@ -185,6 +197,8 @@ export NVM_DIR="$HOME/.nvm"
 
 [[ -s "$HOME/.dotfiles-local/dotfiles/.zshrc" ]] && source "$HOME/.dotfiles-local/dotfiles/.zshrc"
 [[ -e "${HOME}/.iterm2_shell_integration.zsh" ]]  && source "${HOME}/.iterm2_shell_integration.zsh"
+
+[[ -s "$HOME/.zshrc-local" ]] && source "$HOME/.zshrc-local"
 
 #
 # Syntax highlighting of command-line ala "fish"
@@ -209,10 +223,4 @@ if [[ -o login ]]; then
 
     # neofetch --size 25% --iterm2 ~/Documents/Pictures/Self/horsing_around.jpg
 fi
-
-#  if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
-#
-# Language interpreter managers
-#
 
