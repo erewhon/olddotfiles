@@ -1,9 +1,6 @@
 #
-# Zsh config.   I lean on oh-my-zsh.
+# Zsh config.   A lot of oh-my-zsh, a lot of other things...
 #
-source ~/.shellrc
-
-export ZSH=$HOME/.oh-my-zsh
 
 #
 # Set up different languages
@@ -22,6 +19,8 @@ path=(~/bin
       /usr/local/sbin
       $( go env GOPATH )/bin
       $path)
+
+source ~/.shellrc
 
 #
 # Better Python setup using Pyenv.  (Ala rvm from Ruby world)
@@ -139,6 +138,7 @@ zstyle :omz:plugins:ssh-agent identities id_rsa
 
 # User configuration
 
+export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
 export ALTERNATE_EDITOR=""
