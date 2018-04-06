@@ -11,6 +11,11 @@ alias j=jobs
 alias p=pushd
 alias s=ssh
 
+alias gupv='git pull --rebase --autostash -v'
+alias gw='git worktree'
+
+# gwb='git worktree add -b foo ../foo origin/master'
+
 function gack() { 
   ack -g $* 
 }
