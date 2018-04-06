@@ -144,7 +144,7 @@ module.exports = {
     plugins: [
         'hyper-material-theme',
         'hyper-tabs-enhanced',
-        'hyperline',                 // This does not work under Windows
+        //'hyperline',                 // This does not work under Windows
         //'hyper-statusline',
         'hyper-font-smoothing',
         //'hyperborder',

@@ -14,7 +14,7 @@ typeset -U path
 path=(~/bin
       ~/bin/$( uname -s )
       ~/bin.local
-      ~/.yarn/bin
+      # ~/.yarn/bin
       /usr/local/bin
       /usr/local/sbin
       $( go env GOPATH )/bin
@@ -34,22 +34,22 @@ source ~/.shellrc
 # export WORKON_HOME=~/.ve
 # mkdir -p $WORKON_HOME
 
-if [[ -d "$HOME/.pyenv" ]]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-fi
+# if [[ -d "$HOME/.pyenv" ]]; then
+#     export PYENV_ROOT="$HOME/.pyenv"
+#     export PATH="$PYENV_ROOT/bin:$PATH"
+# fi
 
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-fi
+# if command -v pyenv 1>/dev/null 2>&1; then
+#     eval "$(pyenv init -)"
+# fi
 
 #  if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 #
 # nvm - manager for node.js
 #
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
 
 ###
 ## OCaml
@@ -141,6 +141,9 @@ zstyle :omz:plugins:ssh-agent identities id_rsa
 export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
+unsetopt correct_all
+unsetopt correct
+
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"                  # $EDITOR should open in terminal
 export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI with non-daemon as alternate
@@ -187,7 +190,7 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 #
 # export NODE_MODULES=/usr/local/share/npm/lib/node_modules
 
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
