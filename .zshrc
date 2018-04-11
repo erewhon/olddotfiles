@@ -55,8 +55,10 @@ source ~/.shellrc
 ## OCaml
 ###
 # OPAM configuration
-# [ -s "$HOME/.opam/opam-init/init.zsh" ] && \
-#   source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null || true
+[ -s "$HOME/.opam/opam-init/init.zsh" ] && \
+  source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null || true
+
+eval $( opam config env )
 
 #
 # It's the 21st century.  Why are our Unix terminals so boring?  Back
