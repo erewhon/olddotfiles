@@ -16,6 +16,8 @@ module.exports = {
 
         // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
         cursorColor: 'rgba(248,28,229,0.8)',
+
+        opacity: 0.95,
         
         // `BEAM` for |, `UNDERLINE` for _, `BLOCK` for █
         cursorShape: 'BEAM',
@@ -25,9 +27,7 @@ module.exports = {
 
         // terminal background color.  Adding transparency
         backgroundColor: '#000',
-        // backgroundColor: 'rgba(0,0,0,0.1)',
-        // vibrancy: 'ultra-dark',
-
+        
         // border color (window, tabs)
         borderColor: '#333',
 
@@ -36,21 +36,15 @@ module.exports = {
 
         // custom css to embed in the terminal window
         termCSS: '',
-//        `
-//      x-screen x-row {
-//        line-height: initial;
-//        font-variant-ligatures: initial;
-//      }
-//    `,
-
+        
         // set to `true` (without backticks) if you're using a Linux setup that doesn't show native menus
         // default: `false` on Linux, `true` on Windows (ignored on macOS)
-        showHamburgerMenu: '',
+        showHamburgerMenu: 'false',
 
         // set to `false` if you want to hide the minimize, maximize and close buttons
         // additionally, set to `'left'` if you want them on the left, like in Ubuntu
         // default: `true` on windows and Linux (ignored on macOS)
-        showWindowControls: 'true',
+        showWindowControls: 'false',
 
         // custom padding (css format, i.e.: `top right bottom left`)
         // padding: '6px 7px',
@@ -91,7 +85,7 @@ module.exports = {
         // Powershell on Windows
         // - Example: `C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe`
         shell: '',
-
+        
         // for setting shell arguments (i.e. for using interactive shellArgs: ['-i'])
         // by default ['--login'] will be used
         shellArgs: ['--login'],
@@ -101,26 +95,25 @@ module.exports = {
         
         // set to false for no bell
         bell: 'SOUND',
-
+        
         // if true, selected text will automatically be copied to the clipboard
         copyOnSelect: true,
-
+        
         // if true, on right click selected text will be copied or pasted if no
         // selection is present (true by default on Windows)
         // quickEdit: true
-
+        
         // URL to custom bell
         // bellSoundURL: 'http://example.com/bell.mp3',
-
+        
         // for advanced config flags please refer to https://hyper.is/#cfg
-
+        
         // hyper-material-theme
         MaterialTheme: {
             theme: 'Palenight',
-            // backgroundOpacity: '0.85',
             vibrancy: 'ultra-dark'
         },
-
+        
         hyperTabs: {
             trafficButtons: false,
             border: false,
@@ -128,37 +121,20 @@ module.exports = {
             tabIconsColored: true,
             activityColor: '#ffa07a'
         },
-
-        hyperBorder: {
-            animate: {
-                duration: '1s'
-            }
-        },
-
+        
         hypernasa: {
             overlayOpacity: 0.8
         }
     },
-
+    
     // a list of plugins to fetch and install from npm
     plugins: [
         'hyper-material-theme',
         'hyper-tabs-enhanced',
         //'hyperline',                 // This does not work under Windows
-        //'hyper-statusline',
-        'hyper-font-smoothing',
-        //'hyperborder',
-        //
-        // Fancy Git
-        //
-        // 'gitrocket',
-        // 'space-pull',
-        //
-        // Other plugins
-        //
-        // `hyper-mac-controls`
-        'hypernasa',
-        //'hyperterm-retro'
+        'hyper-opacity',
+        'hyperborder',                 // Fancier border
+        'hypernasa'                    // NASA Astronomy picture of the day
         //
         // Totally AWESOMENESS!!!1 (comment out the above)
         //'hyper-cat',
@@ -166,6 +142,12 @@ module.exports = {
         //'hypergravity',
         //'hyper-cat-cursor',
         //'hyper-giphy-stickers'
+        //'hyperterm-retro'        
+        //
+        // Fancy Git
+        //
+        // 'gitrocket',
+        // 'space-pull',
     ],
     
     // in development, you can create a directory under
