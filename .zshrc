@@ -136,7 +136,7 @@ plugins=(ant
 
 #zstyle :omz:plugins:ssh-agent agent-forwarding on
 # Identities I need to find:  docker_do
-zstyle :omz:plugins:ssh-agent identities id_rsa
+zstyle :omz:plugins:ssh-agent identities id_rsa inet_rsa id_ecdsa
 
 # User configuration
 

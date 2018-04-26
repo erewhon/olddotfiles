@@ -130,7 +130,7 @@ module.exports = {
     // a list of plugins to fetch and install from npm
     plugins: [
         'hyper-material-theme',
-        'hyper-tabs-enhanced',
+        //'hyper-tabs-enhanced',
         //'hyperline',                 // This does not work under Windows
         'hyper-opacity',
         'hyperborder',                 // Fancier border
