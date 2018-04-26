@@ -85,6 +85,9 @@
 
 (setq custom-file "~/.emacs.custom")
 
+;; preserve indentation in orgmode source blocks
+(setq org-src-preserve-indentation t)
+
 (org-babel-load-file "~/.emacs.d/elisp.org")
 
 ;;; .emacs ends here
