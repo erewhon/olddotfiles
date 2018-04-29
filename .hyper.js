@@ -133,7 +133,7 @@ module.exports = {
         //'hyper-tabs-enhanced',
         //'hyperline',                 // This does not work under Windows
         'hyper-opacity',
-        'hyperborder',                 // Fancier border
+        //'hyperborder',               // Fancier border (deprecated)
         'hypernasa'                    // NASA Astronomy picture of the day
         //
         // Totally AWESOMENESS!!!1 (comment out the above)
