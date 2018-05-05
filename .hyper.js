@@ -17,8 +17,6 @@ module.exports = {
         // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
         cursorColor: 'rgba(248,28,229,0.8)',
 
-        opacity: 0.95,
-        
         // `BEAM` for |, `UNDERLINE` for _, `BLOCK` for █
         cursorShape: 'BEAM',
         cursorBlink: true,
@@ -111,7 +109,8 @@ module.exports = {
         // hyper-material-theme
         MaterialTheme: {
             theme: 'Palenight',
-            vibrancy: 'ultra-dark'
+            // backgroundOpacity: '0.1',
+            //vibrancy: 'ultra-dark'
         },
         
         hyperTabs: {
@@ -124,17 +123,16 @@ module.exports = {
         
         hypernasa: {
             overlayOpacity: 0.8
-        }
+        },
     },
     
     // a list of plugins to fetch and install from npm
     plugins: [
         'hyper-material-theme',
+        //'hypernasa'                    // NASA Astronomy picture of the day
         //'hyper-tabs-enhanced',
         //'hyperline',                 // This does not work under Windows
-        'hyper-opacity',
         //'hyperborder',               // Fancier border (deprecated)
-        'hypernasa'                    // NASA Astronomy picture of the day
         //
         // Totally AWESOMENESS!!!1 (comment out the above)
         //'hyper-cat',
