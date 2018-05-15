@@ -49,12 +49,12 @@ chunkc set global_desktop_offset_gap     15
 #
 # NOTE: syntax for desktop-specific settings
 #
-chunkc set 3_desktop_mode                monocle
+# chunkc set 3_desktop_mode                monocle
 #
 # I might need to adjust this, "desktop 5" might be
 #   in an unexpected place when using multiple monitors.
 #
-chunkc set 5_desktop_mode                float
+# chunkc set 5_desktop_mode                float
 
 chunkc set 1_desktop_offset_top          100
 chunkc set 1_desktop_offset_bottom       100
@@ -137,6 +137,7 @@ chunkc core::load ffm.so
 #
 
 chunkc tiling::rule --owner Bear --state tile
+# chunkc tiling::rule --owner Firefox --state tile
 chunkc tiling::rule --owner Messages --state tile
 # chunkc tiling::rule --owner SecuritySpy --state float
 chunkc tiling::rule --owner Finder --name Copy --state float
