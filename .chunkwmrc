@@ -34,11 +34,11 @@ chunkc core::hotload 1
 # - 1 - general purpose.  medium margin
 # - 2 - general purpose.  fat margin.
 # - 3 - monocle.  thin margin.  for almost full screen apps
+#
 
 #
 # NOTE: the following are config variables for the chunkwm-tiling plugin.
 #
-
 chunkc set global_desktop_mode           bsp
 chunkc set global_desktop_offset_top     20
 chunkc set global_desktop_offset_bottom  20
@@ -112,7 +112,6 @@ chunkc set preselect_border_width        5
 #   (colors are AARRGGBB)
 
 chunkc set focused_border_color          0xfffd5f00   # Orange
-# chunkc set focused_border_color        0xfffc1da7   # Magenta
 chunkc set focused_border_width          7
 chunkc set focused_border_radius         7
 chunkc set focused_border_skip_floating  0
