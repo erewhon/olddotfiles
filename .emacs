@@ -76,9 +76,10 @@
              '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 
-(message "About to package-initialize")
-
-(package-initialize)
+;; Explicitly running package-initialize became unnecessary starting in Emacs 27
+(when (< emacs-major-version 27)
+  (message "About to package-initialize")
+  (package-initialize))
 
 ;;(require 'org-install)
 ;; (require 'ob-tangle)

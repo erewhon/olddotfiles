@@ -109,8 +109,8 @@ module.exports = {
         // hyper-material-theme
         MaterialTheme: {
             theme: 'Palenight',
-            // backgroundOpacity: '0.1',
-            //vibrancy: 'ultra-dark'
+            backgroundOpacity: '0.9',
+            vibrancy: 'ultra-dark'
         },
         
         hyperTabs: {
@@ -123,16 +123,18 @@ module.exports = {
         
         hypernasa: {
             overlayOpacity: 0.8
-        },
+        }
     },
     
     // a list of plugins to fetch and install from npm
     plugins: [
-        'hyper-material-theme',
+        'hyper-material-theme'
         //'hypernasa'                    // NASA Astronomy picture of the day
         //'hyper-tabs-enhanced',
         //'hyperline',                 // This does not work under Windows
-        //'hyperborder',               // Fancier border (deprecated)
+        //'hyper-opacity',
+        //'hyperborder',                 // Fancier border
+        // NASA Astronomy picture of the day
         //
         // Totally AWESOMENESS!!!1 (comment out the above)
         //'hyper-cat',
@@ -146,6 +148,7 @@ module.exports = {
         //
         // 'gitrocket',
         // 'space-pull',
+        //'hypernasa'
     ],
     
     // in development, you can create a directory under
