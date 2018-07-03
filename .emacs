@@ -49,16 +49,16 @@
          (now-ms (nth 2 nowtime)))
     (concat (format-time-string "[%Y-%m-%dT%T" nowtime) (format ".%d] " now-ms))))
 
-(defadvice message (before sh/advice-timestamp-messages activate compile)
-  "Instrument 'message' to timestamp."
-  (if (not (string-equal (ad-get-arg 0) "%s%s"))
-      (let ((deactivate-mark nil))
-        (with-current-buffer "*Messages*"
-          (read-only-mode 0)
-          (goto-char (point-max))
-          (if (not (bolp))
-              (newline))
-          (insert (sh/current-time-microseconds))))))
+;;(defadvice message (before sh/advice-timestamp-messages activate compile)
+;;  "Instrument 'message' to timestamp."
+;;  (if (not (string-equal (ad-get-arg 0) "%s%s"))
+;;      (let ((deactivate-mark nil))
+;;        (with-current-buffer "*Messages*"
+;;          (read-only-mode 0)
+;;          (goto-char (point-max))
+;;          (if (not (bolp))
+;;              (newline))
+;;          (insert (sh/current-time-microseconds))))))
 
 (message "Starting .emacs")
 

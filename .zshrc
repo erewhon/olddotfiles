@@ -2,21 +2,23 @@
 # Zsh config.   A lot of oh-my-zsh, a lot of other things...
 #
 
+# add elements to path, uniquely
+typeset -U path
+
+path=(/usr/local/bin
+      /usr/local/sbin
+      $path)
+
 #
 # Set up different languages
 #
 export GOPATH=$( go env GOPATH )
 export MANPATH="/usr/local/man:$MANPATH"
 
-# add elements to path, uniquely
-typeset -U path
-
 path=(~/bin
       ~/bin/$( uname -s )
       ~/bin.local
       # ~/.yarn/bin
-      /usr/local/bin
-      /usr/local/sbin
       $( go env GOPATH )/bin
       $path)
 
@@ -109,10 +111,11 @@ setopt AUTO_CD                       # You can just type a directory and CD ther
 #   $JIRA_RAPID_BOARD - Set to true if you use Rapid Board
 #   $JIRA_DEFAULT_ACTION - Action to do when jira is called with no arguments; defaults to "new"
 
+# colored-man-pages
+#
 plugins=(ant
          cap
          chucknorris
-         colored-man-pages
          docker
          extract
          git
@@ -217,15 +220,58 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export LESS='-RMN'
 export LESSOPEN='|~/bin/lessfilter %s'
 
+quote() {
+    # 0. Show date
+    # 1. pick a quote source (fortune, zippy?)
+    # 2. pipe it to a viewer (parrotsay, cowsay, pokemonsay, lolcat)
+    fortune | parrotsay
+}
+# figlet
+
+gnusay() {
+    cowsay -f gnu "$@"
+}
+
+whocall() {
+    cowsay -f ghostbusters Who you Gonna Call | lolcat
+}
+
+starwars() {
+    nc towel.blinkenlights.nl 23
+}
+
+if command -v exa 1>/dev/null 2>&1; then
+    alias ll='exa -abghHl --time-style=long-iso'
+    alias lll='exa -abghHl --time-style=long-iso --extended --git'
+    alias tree='exa -abghHl --time-style=long-iso --tree --level=3'
+fi
+
+alias aq=asciiquarium
+
+if [[ -f /etc/motd ]]; then
+    cmp -s /etc/motd ~/.hushlogin ||
+        tee ~/.hushlogin < /etc/motd
+fi
+
 #
 # Stuff to only run in interactive shells
 #
 if [[ -o login ]]; then
-
-    # Pimp my screen!
-    command -v neofetch >/dev/null 2>&1 && \
-        neofetch
-
+    
+    #
+    # We don't want to go overboard (honest!), so display neofetch once per day, then fortune
+    #
+    NOW=$( date +%F )
+    
+    if ! cmp -s ~/.last_neofetch <( echo $NOW )
+    then
+        echo $NOW > ~/.last_neofetch
+        command -v neofetch >/dev/null 2>&1 && \
+            neofetch
+    else
+        quote
+    fi
+    
     # neofetch --size 25% --iterm2 ~/Documents/Pictures/Self/horsing_around.jpg
 fi
 

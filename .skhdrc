@@ -64,16 +64,16 @@ shift + alt - 4 : chunkc tiling::window --send-to-desktop 4
 shift + alt - 5 : chunkc tiling::window --send-to-desktop 5
 
 # increase region size
-# shift + alt - a : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge west
+shift + alt - a : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge west
 # shift + alt - s : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge south
 # shift + alt - w : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge north
-# shift + alt - d : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge east
+shift + alt - d : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge east
 
 # decrease region size
-# shift + cmd - a : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge west
+shift + cmd - a : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge west
 # shift + cmd - s : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge south
 # shift + cmd - w : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge north
-# shift + cmd - d : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge east
+shift + cmd - d : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge east
 
 # rotate tree
 alt - r : chunkc tiling::desktop --rotate 90
@@ -85,8 +85,8 @@ alt - r : chunkc tiling::desktop --rotate 90
 # shift + alt - f : chunkc tiling::window --toggle native-fullscreen
 
 # change layout of desktop
-# ctrl + alt - a : chunkc tiling::desktop --layout bsp
-# ctrl + alt - s : chunkc tiling::desktop --layout monocle
-# ctrl + alt - d : chunkc tiling::desktop --layout float
+ctrl + alt - b : chunkc tiling::desktop --layout bsp
+ctrl + alt - m : chunkc tiling::desktop --layout monocle
+ctrl + alt - f : chunkc tiling::desktop --layout float
 
 # ctrl + alt - w : chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
