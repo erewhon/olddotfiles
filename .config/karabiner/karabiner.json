@@ -488,7 +488,7 @@
                 }
             ],
             "name": "JISKeyboard",
-            "selected": true,
+            "selected": false,
             "simple_modifications": [],
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,
@@ -830,7 +830,7 @@
                 }
             ],
             "name": "FullSize108",
-            "selected": false,
+            "selected": true,
             "simple_modifications": [],
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,

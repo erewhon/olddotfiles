@@ -5,6 +5,7 @@
 # add elements to path, uniquely
 typeset -U path
 
+# first, add "system" paths
 path=(/usr/local/bin
       /usr/local/sbin
       $path)
@@ -15,9 +16,12 @@ path=(/usr/local/bin
 export GOPATH=$( go env GOPATH )
 export MANPATH="/usr/local/man:$MANPATH"
 
+# set up "local" paths
 path=(~/bin
       ~/bin/$( uname -s )
       ~/bin.local
+      ~/.cargo/bin
+      ~/.local/bin
       # ~/.yarn/bin
       $( go env GOPATH )/bin
       $path)
@@ -111,11 +115,10 @@ setopt AUTO_CD                       # You can just type a directory and CD ther
 #   $JIRA_RAPID_BOARD - Set to true if you use Rapid Board
 #   $JIRA_DEFAULT_ACTION - Action to do when jira is called with no arguments; defaults to "new"
 
-# colored-man-pages
-#
 plugins=(ant
          cap
          chucknorris
+         colored-man-pages
          docker
          extract
          git
@@ -217,8 +220,10 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 #
 # Mo' bling!   Show line numbers, ANSI escapes, long prompt in "less"
 #
-export LESS='-RMN'
+export LESS='-C -j 10 -RMN'
 export LESSOPEN='|~/bin/lessfilter %s'
+export PAGER=less
+
 
 quote() {
     # 0. Show date
@@ -257,7 +262,6 @@ fi
 # Stuff to only run in interactive shells
 #
 if [[ -o login ]]; then
-    
     #
     # We don't want to go overboard (honest!), so display neofetch once per day, then fortune
     #
