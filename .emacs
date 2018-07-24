@@ -42,6 +42,8 @@
 (when (< emacs-major-version 25)
   (message "Your emacs is way too old!"))
 
+;; (setq debug-on-error t)
+
 ;; https://emacs.stackexchange.com/questions/32150/how-to-add-a-timestamp-to-each-entry-in-emacs-messages-buffer
 (defun sh/current-time-microseconds ()
   "Create a microsecond timestamp."

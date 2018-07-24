@@ -52,3 +52,4 @@ Using Pyenv:
 # Things Remaining
 
 https://www.jetbrains.com/help/idea/exporting-and-importing-settings.html
+https://unix.stackexchange.com/questions/260813/bash-hushlogin-keep-last-login-time-and-host
