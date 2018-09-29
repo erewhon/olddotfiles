@@ -1,3 +1,5 @@
+# zmodload zsh/zprof    # Profile zshrc
+
 #
 # Zsh config.   A lot of oh-my-zsh, a lot of other things...
 #
@@ -25,6 +27,8 @@ path=(~/bin
       # ~/.yarn/bin
       $( go env GOPATH )/bin
       $path)
+
+# gpg-agent --daemon --use-standard-socket --pinentry-program /usr/local/bin/pinentry-mac
 
 source ~/.shellrc
 
@@ -118,7 +122,7 @@ setopt AUTO_CD                       # You can just type a directory and CD ther
 plugins=(ant
          cap
          chucknorris
-         colored-man-pages
+         # colored-man-pages
          docker
          extract
          git
@@ -132,7 +136,7 @@ plugins=(ant
          osx
          perl
          repo
-         ssh-agent
+         # ssh-agent
          supervisor
          svn
          tmux
@@ -259,6 +263,21 @@ if [[ -f /etc/motd ]]; then
 fi
 
 #
+# GPG related things
+#
+export VAULT_ADDR='http://127.0.0.1:8200'
+export "GPG_TTY=$(tty)"
+export "SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh"
+
+ssh-rekey() {
+    echo "Rekeying ssh..."
+    vault write -field=signed_key ssh-client-signer/sign/my-role \
+          public_key=@$HOME/.ssh/id_ecdsa.pub > ~/.ssh/id_ecdsa-cert.pub
+    ssh-keygen -Lf ~/.ssh/id_ecdsa-cert.pub
+}
+
+
+#
 # Stuff to only run in interactive shells
 #
 if [[ -o login ]]; then
@@ -279,3 +298,4 @@ if [[ -o login ]]; then
     # neofetch --size 25% --iterm2 ~/Documents/Pictures/Self/horsing_around.jpg
 fi
 
+# zprof          # Profile zshrc
