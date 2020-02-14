@@ -113,13 +113,13 @@ function! OpamConfMerlin()
 endfunction
 let s:opam_configuration['merlin'] = function('OpamConfMerlin')
 
-let s:opam_packages = ["ocp-indent", "ocp-index", "merlin"]
-let s:opam_check_cmdline = ["opam list --installed --short --safe --color=never"] + s:opam_packages
-let s:opam_available_tools = split(system(join(s:opam_check_cmdline)))
-for tool in s:opam_packages
+" let s:opam_packages = ["ocp-indent", "ocp-index", "merlin"]
+" let s:opam_check_cmdline = ["opam list --installed --short --safe --color=never"] + s:opam_packages
+" NOT WORKING   let s:opam_available_tools = split(system(join(s:opam_check_cmdline)))
+" for tool in s:opam_packages
   " Respect package order (merlin should be after ocp-index)
-  if count(s:opam_available_tools, tool) > 0
-    call s:opam_configuration[tool]()
-  endif
-endfor
+"   if count(s:opam_available_tools, tool) > 0
+"     call s:opam_configuration[tool]()
+"   endif
+" endfor
 " ## end of OPAM user-setup addition for vim / base ## keep this line

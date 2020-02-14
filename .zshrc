@@ -161,6 +161,9 @@ export EDITOR="emacsclient -t"                  # $EDITOR should open in termina
 export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI with non-daemon as alternate
 export VERSION_CONTROL=numbered
 
+HISTSIZE=1000000
+SAVEHIST=$HISTSIZE
+
 if [ -d /usr/java/current ]; then
   export JAVA_HOME=/usr/java/current
 fi
@@ -249,6 +252,44 @@ starwars() {
     nc towel.blinkenlights.nl 23
 }
 
+#.# Better Git Logs.
+### Using EMOJI-LOG (https://github.com/ahmadawais/Emoji-Log).
+
+# Git Commit, Add all and Push — in one step.
+function gcap() {
+    git add . && git commit -m "$*" && git push
+}
+
+# NEW.
+function gnew() {
+    gcap "📦 NEW: $@"
+}
+
+# IMPROVE.
+function gimp() {
+    gcap "👌 IMPROVE: $@"
+}
+
+# FIX.
+function gfix() {
+    gcap "🐛 FIX: $@"
+}
+
+# RELEASE.
+function grlz() {
+    gcap "🚀 RELEASE: $@"
+}
+
+# DOC.
+function gdoc() {
+    gcap "📖 DOC: $@"
+}
+
+# TEST.
+function gtst() {
+    gcap "✅ TEST: $@"
+}
+
 if command -v exa 1>/dev/null 2>&1; then
     alias ll='exa -abghHl --time-style=long-iso'
     alias lll='exa -abghHl --time-style=long-iso --extended --git'
@@ -299,3 +340,5 @@ if [[ -o login ]]; then
 fi
 
 # zprof          # Profile zshrc
+eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"

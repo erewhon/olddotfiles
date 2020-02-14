@@ -88,6 +88,9 @@ here from my ~/.emacs file.  I should refactor it at some point, and
 continue integrating with my legacy elisp.org file.
 
 * Experimental things
+:LOGBOOK:
+CLOCK: [2020-02-14 Fri 11:27]
+:END:
 
 Things to look at:
 - http://ergoemacs.org/emacs/elisp_run_current_file.html
@@ -181,7 +184,10 @@ Things to look at:
 (use-package yaml-mode
   :defer t)
 
-(use-package org-pomodoro)
+(use-package org-pomodoro
+  :bind (("C-c p" . org-pomodoro)))
+(setq org-pomodoro-short-break-length 11)
+(setq org-pomodoro-length 49)
 
 ;; Use alternate line number library
 ;;  (use-package nlinum-hl
@@ -603,11 +609,11 @@ undo behavior...
       (message "Linux"))))
 
 ;; Setting transparency; (active . inactive)
-  (set-frame-parameter (selected-frame) 'alpha '(98 . 50))  ;; barely transparent when active
+(set-frame-parameter (selected-frame) 'alpha '(98 . 50))  ;; barely transparent when active
 ;;(set-frame-parameter (selected-frame) 'alpha '(70 . 50))  ;; very transparent when active
-  (add-to-list 'default-frame-alist '(alpha . (98 . 50)))
+(add-to-list 'default-frame-alist '(alpha . (98 . 50)))
 
-  (tool-bar-mode -1)
+(tool-bar-mode -1)
   (menu-bar-mode -1)
   (fringe-mode nil)    ;; indent of text on left and right...
 
@@ -1827,71 +1833,6 @@ End:
 #+END_EXAMPLE
 
 will set variable in a file.
-
-
-* Pending
-** http://www.emacswiki.org/emacs/ToDoChiKu    2011/12/23
-** SpeedBar : key to toggle it?
-** http://blog.remvee.net/2010/08/19/elein_el_leiningen_functions_for_emacs
-** [#B] Other java env stuff
-** [#A] http://www.gnu.org/software/global
-
-for source tagging
-
-** [#B] http://ecb.sourceforge.net/
-
-** [#B] http://orgmode.org/manual/Cooperation.html
-** http://github.com/technomancy/durendal/blob/master/durendal.el  Clojure stuff
-
-
-** http://www.emacswiki.org/emacs/ElectricPair
-
-** org-mtags.el : can use tags like <quote></quote>
-** http://juanreyero.com/article/emacs/org-mode.html
-** http://juanreyero.com/article/emacs/org-teams.html
-** DONE [#A] http://www.emacswiki.org/emacs/ParEdit
-   CLOSED: [2010-09-25 Sat 01:53]
-   - CLOSING NOTE [2010-09-25 Sat 01:53] \\
-     done
-** DONE Upgrade org mode ; do customizations in babel
-   CLOSED: [2010-08-25 Wed 01:02]
-   - CLOSING NOTE [2010-08-25 Wed 01:02]
-** DONE MMM mode
-   CLOSED: [2010-08-26 Thu 21:52]
-   - CLOSING NOTE [2010-08-26 Thu 21:52] \\
-     downloaded and initial config
-** http://www.emacswiki.org/emacs/Yaoddmuse
-** DONE https://launchpad.net/mediawiki-el
-CLOSED: [2011-06-13 Mon 12:11]
-- State "DONE"       from ""           [2011-06-13 Mon 12:11] \\
-  this was done months ago?
-** Version control
-
-Git, Mercurial, Subversion
-
-** Google sites editor?
-** [#A] http://github.com/purcell/ac-slime  Autocomplete for Slime
-** Groovy mode  http://www.emacswiki.org/emacs/GroovyMode
-** Flymake
-** http://soundandcomplete.com/2010/05/13/emacs-as-the-ultimate-latex-editor/
-** http://codehunk.wordpress.com/2009/01/14/ruby-on-emacsjourney-from-textmate-to-emacs/
-** DONE clojure
-   CLOSED: [2010-09-01 Wed 01:39]
-   - CLOSING NOTE [2010-09-01 Wed 01:39]
-** scale
-** change hs-toggle-hiding to be global
-** think about finding old files, for ideas
-** old elpa
-
-;;; This was installed by package-install.el.
-;;; This provides support for the package system and
-;;; interfacing with ELPA, the package archive.
-;;; Move this code earlier if you want to reference
-;;; packages in your .emacs.
-;;(when
-;;    (load
-;;     (expand-file-name "~/src/elisp/elpa/package.el"))
-;;  (package-initialize))
 
 
 * Prologue
