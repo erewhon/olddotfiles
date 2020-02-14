@@ -309,7 +309,6 @@ Things to look at:
 
 https://github.com/JAremko/docker-emacs
 
-
 * System settings
 
 #+BEGIN_SRC emacs-lisp
@@ -487,46 +486,30 @@ undo behavior...
 ;;
 ;; Tweak the UI
 ;;
-;; atom-one-dark
-;; dracula
 (use-package atom-one-dark-theme
   :init
   (load-theme 'atom-one-dark t))
 
-;;(use-package kaolin-themes
-;;  :init
-;;  (load-theme 'kaolin-ocean t))
-;;(setq kaolin-themes-underline-wave t)
-;; (setq kaolin-themes-hl-line-colored t)
-
-;;(use-package material-theme
-;;    :init
-;;    (load-theme 'material t))
-
-;;(use-package oceanic-theme
-;;    :init
-;;    (load-theme 'oceanic t))
-
-  ;; check OS type, and make platform-specific changes appropriately
-  (cond
-   ((string-equal system-type "windows-nt") ; Microsoft Windows
-    (progn
-      (when (member "DejaVu Sans Mono" (font-family-list))
-        (add-to-list 'initial-frame-alist '(font . "DejaVu Sans Mono-10"))
-        (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")))
-      (custom-set-variables '(tramp-default-method "plink" nil (tramp)))
-      (message "Microsoft Windows")))
-   ((string-equal system-type "darwin") ; Mac OS X
-    (progn
-      (setq default-frame-alist 
-            '((ns-transparent-titlebar . t) 
-              (ns-appearance . 'nil)))
-
+;; check OS type, and make platform-specific changes appropriately
+(cond
+ ((string-equal system-type "windows-nt") ; Microsoft Windows
+  (progn
+    (when (member "DejaVu Sans Mono" (font-family-list))
+      (add-to-list 'initial-frame-alist '(font . "DejaVu Sans Mono-10"))
+      (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")))
+    (custom-set-variables '(tramp-default-method "plink" nil (tramp)))
+    (message "Microsoft Windows")))
+ ((string-equal system-type "darwin") ; Mac OS X
+  (progn
+    (setq default-frame-alist 
+          '((ns-transparent-titlebar . t) 
+            (ns-appearance . 'nil)))
+    
       ;; Fira Core seems pretty solid
       ;; I will probably switch to Operator Mono at some point since all the cool kids
       ;; use it...
       ;; (set-face-attribute 'default nil :family "Fira Code")   
-      ;; (set-face-attribute 'default nil :family "FuraCode Nerd Font Mono Light")
+    ;; (set-face-attribute 'default nil :family "FuraCode Nerd Font Mono Light")
       ;; (set-face-attribute 'default nil :family "Fira Sans")
       ;; (set-face-attribute 'default nil :family "Verdana")   ;; test fonts...
       ;; (set-face-attribute 'default nil :family "Menlo")
@@ -674,32 +657,13 @@ Attempts to set the indentation level (number of spaces for an indent) for a maj
 
 #+END_SRC
 
-** Hideshow    :disabled:
+** Hideshow
 
 For text folding.  We also add on fold-dwim so we have consistent interface...
 
 #+BEGIN_SRC emacs-lisp
 
 (use-package yafolding :defer t)
-;;  (require 'hideshow)
-;;  (eval-after-load "hideshow"
-;;    '(progn
-;;       (add-hook 'java-mode-hook 'hs-minor-mode)
-;;       (add-hook 'perl-mode-hook 'hs-minor-mode)
-;;       (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
-;;       (add-hook 'emacs-lisp-mode-hook
-;;                 (lambda ()
-;;                   (local-set-key (kbd "RET") 'electrify-return-if-match)))
-;;    
-;;       (setq hs-isearch-open 't)                            ;; isearch in folded code & comments
-;;    
-;;       (defadvice goto-line (after expand-after-goto-line
-;;                                   activate compile)
-;;         "hideshow-expand affected block when using goto-line in a collapsed buffer"
-;;         (save-excursion
-;;           (hs-show-block)))))
-;;
-;;  (require 'fold-dwim)
   
 #+END_SRC
 
@@ -723,52 +687,16 @@ For text folding.  We also add on fold-dwim so we have consistent interface...
 
   (setq org-export-with-LaTeX-fragments t)   ;; just in case...
         
-  (define-key global-map "\C-cl" 'org-store-link) ;; deprecate?
   (define-key global-map "\C-ca" 'org-agenda)
             
-  ;; http://doc.norang.ca/org-mode.html#sec-3_1
-  ;; http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html
-
-;;  (setq org-todo-keywords '((sequence "☛ TODO(t)" "|" "<img draggable="false" class="emoji" alt="✔" src="https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/svg/2714.svg"> DONE(d)")
-;;      (sequence "⚑ WAITING(w)" "|")
-;;      (sequence "|" "✘ CANCELED(c)")))
-
   (setq org-todo-keywords (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d@/!)")
                                     (sequence "WAITING(w@/!)" "SOMEDAY(s!)" "|" "CANCELLED(c@/!)" "PHONE"))))
     
   (setq org-use-fast-todo-selection t)
   (setq org-treat-S-cursor-todo-selection-as-state-change nil)
     
-  ;; remember mode?
-    
-  ;;spb;;  (setq org-directory "~/Notes/org")
-  ;;spb;;  ;;(setq org-default-notes-file (concat org-directory "/todo.org"))
-  ;;spb;;  ;;(define-key global-map "\C-cr" 'org-remember)
-  ;;spb;;  ;; (global-set-key "\C-ca" 'org-agenda)
-  ;;spb;;  (setq org-completion-use-ido t)
-  ;;spb;;  (global-set-key "\C-cb" 'org-iswitchb)
-      
-    ;; need to hook this to run later...
-  ;;spb;;  (eval-after-load "org-latex"
-  ;;spb;;    '(progn
-  ;;spb;;       (add-to-list 'org-export-latex-classes
-  ;;spb;;                    '("koma-article"
-  ;;spb;;                      "\\documentclass{scrartcl}"
-  ;;spb;;                      ("\\section{%s}" . "\\section*{%s}")
-  ;;spb;;                      ("\\subsection{%s}" . "\\subsection*{%s}")
-  ;;spb;;                      ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-  ;;spb;;                      ("\\paragraph{%s}" . "\\paragraph*{%s}")
-;;spb;;                      ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-  ;;spb;;       ;; more stuff here...
-  ;;spb;;       ))
-     
-  ;;spb;;  (setq  org-quote-string "QUOTEQUOTE") ;; turn off quoting feature
-      
     (setq org-export-email-info t)
       
-  ;;spb;;  (setq org-agenda-files (quote (
-  ;;spb;;                                 )))
-        
     (setq org-agenda-sort-strategy
           '((agenda habit-down time-up category-up priority-down)
             (todo priority-down category-keep)
@@ -793,46 +721,16 @@ For text folding.  We also add on fold-dwim so we have consistent interface...
 
     (setq org-agenda-log-mode-items (quote (clock)))
           
-  ;;spb;;  (org-babel-do-load-languages
-  ;;spb;;   'org-babel-load-languages
-  ;;spb;;   '((emacs-lisp . t)
-  ;;spb;;     (sh . t)
-  ;;spb;;     (dot . t)
-  ;;spb;;     (ditaa . t)))
-    
-  ;;spb;;    (require 'ob-ditaa)
-  ;;spb;;    (require 'ob-sh)
-    
-    ;;
-    ;; org indent mode (testing)
-    ;;   (http://www.gnu.org/software/emacs/manual/html_node/org/Clean-view.html)
-    ;;
     (setq org-startup-indented t)
 
   (use-package org-bullets
      :config
      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
-  ;; turn off ligatures for org mode buffers
-;;  (add-hook 'org-mode-hook (lambda () (setq auto-composition-mode nil)))
-        
 #+END_SRC
 
 #+RESULTS:
 : t
-
-** ACK mode
-
-Better search.
-A few different versions.  http://www.rooijan.za.net/?q=ack_el is one.
-http://nschum.de/src/emacs/full-ack/ is one I'm using for now...
-Although... no workie...  (Both no workie... <sigh>)
-
-#+BEGIN_SRC emacs-lisp
-
-(use-package ack :defer t)
-
-#+END_SRC
 
 * Development
 
@@ -840,10 +738,6 @@ Although... no workie...  (Both no workie... <sigh>)
   
   (message "Development")
 
-;;(defun my-make-CR-do-indent ()
-;;  (define-key c-mode-base-map "\C-m" 'c-context-line-break))
-;;(add-hook 'c-initialization-hook 'my-make-CR-do-indent)
-  
 #+END_SRC
 
 ** Source control: Git and Gitlab
@@ -883,7 +777,7 @@ Although... no workie...  (Both no workie... <sigh>)
 
 #+END_SRC
 
-** Clojure  :review:
+** Clojure
 
 Useful key bindings:
 
@@ -909,8 +803,7 @@ Useful key bindings:
     This "focuses" your attention on a single fact by hiding all other facts.
     
 Clojure!
-
-    
+   
     
 #+BEGIN_SRC emacs-lisp
   ;;
@@ -929,68 +822,12 @@ Clojure!
      :defer t
      :config
      (add-hook 'clojure-mode-hook 'parinfer-mode))
-
-  ;;(setq clojure-enable-paredit t)
-    
-  ;;(add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))  ;; redundant!
-    
-  ;;(setq tab-always-indent 'complete) ;; move this somewhere else?
-  
-  ;;(add-hook 'clojure-mode (lambda () (paredit-mode +1)))
-  
-  ;;;;(define-key clojure-mode-map (kbd "C-c v") 'slime-eval-buffer)
-  ;;;;(define-key clojure-mode-map (kbd "C-c C-v") 'slime-eval-buffer)
-  ;;(define-key clojure-mode-map (kbd "C-c r") 'nrepl-jack-in)
-  
-  ;;(require 'rainbow-delimiters)
-  
-  ;;(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-  
-  ;;;;(add-hook 'nrepl-interaction-mode 'paredit-mode)
-
-  ;;;;(require 'ac-nrepl)
-  ;;;;(add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
-  ;;;;(add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
-  ;;;;(eval-after-load "auto-complete"
-  ;;  '(add-to-list 'ac-modes 'nrepl-mode))
-
-  ;;(require 'midje-mode)
-  ;;(add-hook 'clojure-mode-hook 'midje-mode)
-
-  ;;;; from http://eschulte.me/emacs24-starter-kit/starter-kit-lisp.html
-  ;;;; (defun slime-jump-to-trace (&optional on)
-  ;;;;   "Jump to the file/line that the current stack trace line references.
-  ;;;; Only works with files in your project root's src/, not in dependencies."
-  ;;;;   (interactive)
-  ;;;;   (save-excursion
-  ;;;;     (beginning-of-line)
-  ;;;;     (search-forward-regexp "[0-9]: \\([^$(]+\\).*?\\([0-9]*\\))")
-  ;;;;     (let ((line (string-to-number (match-string 2)))
-  ;;;;           (ns-path (split-string (match-string 1) "\\."))
-  ;;;;           (project-root (locate-dominating-file default-directory "src/")))
-  ;;;;       (find-file (format "%s/src/%s.clj" project-root
-  ;;;;                          (mapconcat 'identity ns-path "/")))
-  ;;;;       (goto-line line))))
-  ;;;; 
-  ;;;; (eval-after-load 'slime
-  ;;;;   '(progn
-  ;;;;      (defalias 'sldb-toggle-details 'slime-jump-to-trace)
-  ;;;;      (defun sldb-prune-initial-frames (frames)
-  ;;;;        "Show all stack trace lines by default."
-  ;;;;        frames)))
-  
-  ;;;; heh...
-  ;;;;(eval-after-load 'clojure-mode
-  ;;;;  '(font-lock-add-keywords
-  ;;;;    'clojure-mode `(("(\\(fn\\>\\)"
-  ;;;;                     (0 (progn (compose-region (match-beginning 1)
-  ;;;;                                               (match-end 1) "ƒ") ;;  λ
-  ;;;;                               nil))))))
-  
   
 #+END_SRC
 
 ** Java  :disabled:
+
+port these over to C
 
 #+BEGIN_SRC
   (defun my-java-mode-hook()
@@ -1054,143 +891,7 @@ Better Javascript mode.
 
 #+END_SRC
 
-** OCaml
-
-#+BEGIN_SRC emacs-lisp
-
-;;(if (require 'quelpa nil t)
-;;      (quelpa-self-upgrade)
-;;    (with-temp-buffer
-;;      (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
-;;      (eval-buffer)))
-
-;; (quelpa '(reason-mode :repo "reasonml-editor/reason-mode" :fetcher github :stable t))
-
-  (let ((opam-share (ignore-errors (car (process-lines "opam" "config" "var" "share")))))
-    (when (and opam-share (file-directory-p opam-share))
-           ;; Register Merlin
-      (add-to-list 'load-path (expand-file-name "emacs/site-lisp" opam-share))
-      (autoload 'merlin-mode "merlin" nil t nil)
-      ;; Automatically start it in OCaml buffers
-      (add-hook 'tuareg-mode-hook 'merlin-mode t)
-      (add-hook 'caml-mode-hook 'merlin-mode t)
-      ;; Use opam switch to lookup ocamlmerlin binary
-      (setq merlin-command 'opam)))
-
-  ;;----------------------------------------------------------------------------
-  ;; Reason setup
-  ;;----------------------------------------------------------------------------
-
-  ;;  (defun shell-cmd (cmd)
-  ;;    "Returns the stdout output of a shell command or nil if the command returned
-  ;;     an error"
-  ;;    (car (ignore-errors (apply 'process-lines (split-string cmd)))))
-  ;;
-  ;;  (let* ((refmt-bin (or (shell-cmd "refmt ----where")
-  ;;                        (shell-cmd "which refmt")))
-  ;;         (merlin-bin (or (shell-cmd "ocamlmerlin ----where")
-  ;;                         (shell-cmd "which ocamlmerlin")))
-  ;;         (merlin-base-dir (when merlin-bin
-  ;;                            (replace-regexp-in-string "bin/ocamlmerlin$" "" merlin-bin))))
-  ;;    ;; Add npm merlin.el to the emacs load path and tell emacs where to find ocamlmerlin
-  ;;    (when merlin-bin
-  ;;      (add-to-list 'load-path (concat merlin-base-dir "share/emacs/site-lisp/"))
-  ;;      (setq merlin-command merlin-bin))
-  ;;  
-  ;;    (when refmt-bin
-  ;;      (setq refmt-command refmt-bin)))
-  ;;
-  ;;  (require 'reason-mode)
-  ;;  (require 'merlin)
-  ;;  (add-hook 'reason-mode-hook (lambda ()
-  ;;                                (add-hook 'before-save-hook 'refmt-before-save)
-  ;;                                (merlin-mode)))
-  ;;
-  ;;  (setq merlin-ac-setup t)
-
-
-#+END_SRC
-
-** Scala
-
-Nothing right now...
-
-#+BEGIN_SRC emacs-lisp
-#+END_SRC
-
-** Shell mode  :disabled:
-
-#+BEGIN_SRC
-
-(autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-
-;; probably only Linux : http://www.emacswiki.org/emacs/ShellDirtrackByProcfs
-
-;; http://www.emacswiki.org/emacs/ShellDirtrackByPrompt
-
-;; default: ("^emacs \\([a-zA-Z]:.*\\)>" 1)
-
-(setq dirtrack-list '("^erewhon@demeter:\\(.*\\)\\$ " 1 nil))
-  
-;; xxx: fix!
-;(add-hook 'shell-mode-hook
-;  #'(lambda ()
-;      (dirtrack-mode 1)
-;        (add-hook 'comint-preoutput-filter-functions
-;        'dirtrack-filter-out-pwd-prompt t t)))
-
-;; http://www.emacswiki.org/emacs/ShellDirtrackByProcfs
-
-(defun track-shell-directory/procfs ()
-    (shell-dirtrack-mode 0)
-    (add-hook 'comint-preoutput-filter-functions
-              (lambda (str)
-                (prog1 str
-                  (when (string-match comint-prompt-regexp str)
-                    (cd (file-symlink-p
-                         (format "/proc/%s/cwd" (process-id
-                                                 (get-buffer-process
-                                                  (current-buffer)))))))))
-              nil t))
-
-;; (add-hook 'shell-mode-hook 'track-shell-directory/procfs)
-
-
-;; http://www.emacswiki.org/emacs/ShellMode
-
-(require 'shell)
-(require 'term)
-(defun term-switch-to-shell-mode ()
-  (interactive)
-  (if (equal major-mode 'term-mode)
-      (progn
-        (shell-mode)
-        (set-process-filter  (get-buffer-process (current-buffer)) 'comint-output-filter )
-        (local-set-key (kbd "C-j") 'term-switch-to-shell-mode)
-        (compilation-shell-minor-mode 1)
-        (comint-send-input)
-      )
-    (progn
-        (compilation-shell-minor-mode -1)
-        (font-lock-mode -1)
-        (set-process-filter  (get-buffer-process (current-buffer)) 'term-emulate-terminal)
-        (term-mode)
-        (term-char-mode)
-        (term-send-raw-string (kbd "C-l"))
-        )))
-
-(define-key term-raw-map (kbd "C-j") 'term-switch-to-shell-mode)
-
-;; things to try:
-;; http://www.emacswiki.org/emacs/AnsiTermHints
-;; http://www.emacswiki.org/emacs/ShellDirtrackByPrompt
-;; http://emacs-fu.blogspot.com/2008/12/running-console-programs-inside-emacs.html
-
-
-#+END_SRC
-
-** eshell  :disabled:
+** eshell                                                         :disabled:
 
 For setup, symlink ~/.eshell to ~/src/my/dotfiles/eshell
 
@@ -1217,27 +918,6 @@ why doesn't smart complete work?
   (setq eshell-review-quick-commands nil)
   (setq eshell-smart-space-goes-to-end t)
   (setq eshell-save-history-on-exit t)
-
-#+END_SRC
-
-** Snippets      :disabled:
-
-Inspired by a talk for Clojure Conj.  Not sure if he was using YAS or
-not.  Should ask...
-
-Snippet ideas:
-- elisp.org BEGIN_SRC / END_SRC block (done)
-- project.clj : overview (done)
-- clojure : namespace (maybe refactor import into separate snippet?)
-  
-#+BEGIN_SRC
-
-;; YASnippet
-
-(require 'yasnippet)
-(yas-global-mode 1)
-
-;; (yas--initialize)
 
 #+END_SRC
 
@@ -1276,7 +956,6 @@ Especially for languages with closures.
 
 #+END_SRC
 
-** Markup code
 ** Misc Code-related tweaks
 
 #+BEGIN_SRC emacs-lisp
@@ -1310,137 +989,6 @@ Especially for languages with closures.
   (message "Communications, web, networking")
   
 #+END_SRC
-
-
-** Weblogging   :disabled:
-
-#+BEGIN_SRC
-
-;;http://www.emacswiki.org/emacs/WebloggerMode
-
-;;(add-to-list 'load-path "~/.emacs.d/weblogger")
-;;(require 'weblogger)
-
-#+END_SRC
-
-** IRC   :disabled:
-
-#+BEGIN_SRC
-  ;; http://www.emacswiki.org/emacs/?action=browse;oldid=EmacsIRCClient;id=ERC
-  ;; http://emacs-fu.blogspot.com/2009/06/erc-emacs-irc-client.html
-  
-  (require 'erc)
-  (require 'tls)
-  
-  (erc-autojoin-mode t)
-  (setq erc-autojoin-channels-alist
-        '((".*\\.freenode.net" "#hwug" "#wireless" "#clojure" "#flatland" "#immutant" "#lighttable")))
-  
-  ;; check channels
-  (erc-track-mode t)
-  (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
-                                  "324" "329" "332" "333" "353" "477"))
-  ;; don't show any of this
-  ;;(setq erc-hide-list '("JOIN" "PART" "QUIT" "NICK"))
-  
-  ;; (setq my-znc-host "gw.steve.net")
-  (setq my-znc-host "107.20.210.148")
-  
-  (defun djcb-erc-start-or-switch ()
-    "Connect to ERC, or switch to last active buffer"
-    (interactive)
-    (if (get-buffer (concat my-znc-host ":8443")) ;; ERC already active?
-        
-        (erc-track-switch-buffer 1) ;; yes: switch to last active
-      ;; removed the prompt ; I just want to start ERC
-      (erc-tls :server my-znc-host :port 8443 :nick "erewhon"
-               :password "erewhon:foo.bar" :full-name "erewhon")))
-  
-  ;; (erc-tls :server my-znc-host :port 8443 :nick "erewhon77021" :password "erewhon77021:foo.bar" :full-name "erewhon77021")
-  
-  ;; 107.20.210.148
-  ;;(erc :server "irc.freenode.net" :port 6667 :nick "erewhon" :full-name "erewhon")
-  
-  ;; connect to freenode (via ZNC)
-  (global-set-key "\C-cef" (lambda () (interactive)
-                             (erc-tls :server "nifty.aws.steve.net" :port "8443"
-                                      :nick "erewhon" :password "erewhon:foo.bar"
-                                      :full-name "erewhon")))
-  ;; connect to bitlbee (via ZNC)
-  (global-set-key "\C-ceb" (lambda () (interactive)
-                             (erc-tls :server my-znc-host :port "8443"
-                                      :nick "erewhon77021" :password "erewhon77021:foo.bar"
-                                      :full-name "erewhon77021")))
-  
-  ;; color-theme-solarized-dark for IMing
-  ;; color-theme-blackboard for working
-  
-  (setq erc-log-channels-directory "~/Dropbox/ChatLogs/erc/")
-  
-  (setq erc-save-buffer-on-part nil
-        erc-save-queries-on-quit nil
-        erc-log-write-after-send t
-        erc-log-write-after-insert t)
-  
-  (require 'erc-services)
-  (erc-services-mode 1)
-  (setq erc-prompt-for-nickserv-password nil)
-  (setq erc-nickserv-passwords
-        '((freenode     (("erewhon" . "foo.bar")))))
-  (add-hook 'erc-insert-post-hook 'erc-save-buffer-in-logs)
-  
-  
-  ;; http://www.emacswiki.org/emacs/ErcGrowl
-  (defvar growlnotify-command (executable-find "growlnotify") "The path to growlnotify")
-  
-  (defun growl (title message)
-    "Shows a message through the growl notification system using
-    `growlnotify-command` as the program."
-    (flet ((encfn (s) (encode-coding-string s (keyboard-coding-system))) )
-      (let* ((process (start-process "growlnotify" nil
-                                     growlnotify-command
-                                     (encfn title)
-                                     "-a" "Emacs"
-                                     "-n" "Emacs")))
-        (process-send-string process (encfn message))
-        (process-send-string process "\n")
-        (process-send-eof process)))
-    t)
-  
-  (defun my-erc-hook (match-type nick message)
-    "Shows a growl notification, when user's nick was mentioned. If the buffer is currently not visible, makes it sticky."
-    (unless (posix-string-match "^\\** *Users on #" message)
-      (growl
-       (concat "ERC: name mentioned on: " (buffer-name (current-buffer)))
-       message
-       )))
-  
-  (add-hook 'erc-text-matched-hook 'my-erc-hook)
-  
-#+END_SRC
-
-** ssh  :disabled:
-
-This file parses
-
-#+BEGIN_SRC emacs-lisp
-  
-;;  (require 'keychain-environment)
-;;  (keychain-refresh-environment)
-  
-#+END_SRC
-** Tramp  :disabled:
-
-#+BEGIN_SRC
-  
-(require 'tramp)
-
-;; Put customized variable in emacs-custom.el...
-
-;;(setq tramp-default-method ”scp”)
-;;(add-to-list 'tramp-remote-process-environment "JAVA_HOME=/opt/java")
-#+END_SRC
-
 
 * Functions
 
@@ -1596,98 +1144,7 @@ To be refactored...
 
 #+BEGIN_SRC
 
-;; misc lisp...
-;; (require 'fold-dwim)
-
-;;
-;; Org mode and remember...
-;; 
-
-(add-to-list 'load-path "~/.emacs.d/remember-2.0")
-(require 'remember)
-(setq remember-annotation-functions '(org-remember-annotation))
-(setq remember-handler-functions '(org-remember-handler))
-(add-hook 'remember-mode-hook 'org-remember-apply-template)
-
-; http://orgmode.org/manual/Remember-templates.html#Remember-templates
-;        ("Journal" ?j "* %U %?\n\n  %i\n  %a" "~/org/JOURNAL.org")
-;        ("Idea" ?i "* %^{Title}\n  %i\n  %a" "~/org/JOURNAL.org" "New Ideas")))
-
-(setq org-remember-templates
-      '(("Todo"     ?t "* TODO %?\n  %i\n  %a" "~/Notes/org/todo.org" "Incoming")
-        ("House"    ?h "* TODO %?\n  %i\n  %a"  "~/Notes/org/house.org" "Tasks")
-        ("Diary"    ?d "* %t\n%?  %i\n  %a"     "~/Notes/org/diary.org" "Diary")
-        ("Shopping" ?s "* TODO %?\n  %i\n  %a"  "~/Notes/org/shopping.org" "Incoming")
-        ("Grocery"  ?g "* %?\n"                 "~/Notes/org/shopping.org" "Grocery")
-        ("Tech"     ?x "* TODO %?\n  %i\n  %a"  "~/Notes/org/tech.org" "Research")))
-
 ; clean-buffer-list from midnight-hook
-
-;;;
-;;; Development
-;;;
-
-;;; to look at:
-;; http://www.emacswiki.org/emacs/EmacsEclim
-
-
-;;;
-;;; Clojure
-;;;
-;; from http://gist.github.com/407543
-;; First fetch CVS version of slime, git version of clojure, swank-clojure, clojure-contrib and clojure-mode
-
-;; Create ~/bin/clojure script which starts clojure repl and adds clojure-contrib src dir and swank-clojure src dir to classpath. I used clj-env helper from clojure-contrib
-
-;(pushnew '("\.clj$" . clojure-mode) auto-mode-alist)
-;(require 'clojure-mode)
-
-;;;; Slime configuration stuff
-;(setf slime-lisp-implementations
-;	  '((ecl("~/bin/ecl" "--heap-size" "1024000000") :coding-system utf-8-unix)
-;		(sbcl ("sbcl"))
-;		(ccl ("~/cvstree/ccl.svn/lx86cl"))
-;		(abcl ("~/cvstree/abcl.svn/abcl") :coding-system iso-latin-1-unix)
-;		(clojure ("~/bin/clojure") :init swank-clojure-init)
-;		))
-;(require 'slime-autoloads)
-;(setf slime-use-autodoc-mode nil) ;; swank-clojure doesn't support autodoc-mode
-;(slime-setup '(slime-banner slime-repl slime-fancy slime-scratch slime-editing-commands slime-scratch slime-asdf))
-;
-;(setf slime-net-coding-system 'utf-8-unix)
-;
-;(setf swank-clojure-binary "/home/username/bin/clojure")
-;(require 'swank-clojure)
-;
-;(defun run-clojure ()
-;  "Runs clojure lisp REPL"
-;  (interactive)
-;  (slime 'clojure))
-;
-;(defun run-ccl ()
-;  "Runs ccl lisp REPL"
-;  (interactive)
-;  (slime 'ccl))
-
-;; To compile and save, one of the following:
-;;  1:
-;; (fset 'compile-and-goto-repl
-;;   "\C-x\C-s\C-c\C-k\C-c\C-z")
-;;
-;;(global-set-key [f6] 'compile-and-goto-repl)
-;;
-;;  2: 
-;(defun clojure-slime-maybe-compile-and-load-file ()
-;  "Call function `slime-compile-and-load-file' if current buffer is connected to a swank server.                                                               
-;
-;Meant to be used in `after-save-hook'."
-;  (when (and (eq major-mode 'clojure-mode) (slime-connected-p))
-;    (slime-compile-and-load-file)))
-
-
-;(add-hook 'after-save-hook 'clojure-slime-maybe-compile-and-load-file)
-
-
 
 ;;;
 ;;; colors
@@ -1699,54 +1156,13 @@ To be refactored...
 ;;;(mac-key-mode 0)
 
 
-
-;; from http://edward.oconnor.cx/2005/09/editing-javascript-in-emacs
-(require 'generic-x)
-
-;;(setq load-path (append (list "~/.emacs.d/cedet")
-;;			load-path))
-;;(setq load-path (append (list "~/.emacs.d/cedet/common")
-;;			load-path))
-;;(setq load-path (append (list "~/.emacs.d/cogre")
-;;			load-path))
-;;(setq load-path (append (list "~/.emacs.d/elib")
-;;			load-path))
-;;(setq load-path (append (list "~/.emacs.d/eieio")
-;;			load-path))
-;;(setq load-path (append (list "~/.emacs.d/semantic")
-;;			load-path))
-
-;;(load-file (expand-file-name "~/.emacs.d/cedet/common/cedet.el"))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Language modes
-;;;
-
-
 ;; YASnippet
 
 ; (require 'yasnippet)
 ; (yas/initialize)
 ; (yas/load-directory "~/src/elisp/yasnippet/snippets")
 
-;; scala
-; (add-to-list 'load-path "/usr/local/scala/misc/scala-tool-support/emacs")
-
-;(add-hook 'scala-mode-hook
-;          '(lambda ()
-;             (yas/minor-mode-on)
-;             ))
-
-;(require 'scala-mode-auto)
-
-;;;
-;;; hippie expand...
-;;;
-
 #+END_SRC
-
 
 * Final tasks
 
@@ -1817,7 +1233,6 @@ To be refactored...
   
 #+END_SRC
 
-
 * Examples
 
 Things I can do:
@@ -1833,7 +1248,6 @@ End:
 #+END_EXAMPLE
 
 will set variable in a file.
-
 
 * Prologue
 
