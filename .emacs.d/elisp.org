@@ -71,7 +71,8 @@ too old.
 
 ;; Force use-package to always fetch packages.
 (setq use-package-always-ensure t)
-  
+
+;; Hide minor modes!
 (use-package diminish)
 
 ;; Better package manager.  Shows Github star ratings!!
@@ -88,9 +89,6 @@ here from my ~/.emacs file.  I should refactor it at some point, and
 continue integrating with my legacy elisp.org file.
 
 * Experimental things
-:LOGBOOK:
-CLOCK: [2020-02-14 Fri 11:27]
-:END:
 
 Things to look at:
 - http://ergoemacs.org/emacs/elisp_run_current_file.html
@@ -112,17 +110,23 @@ Things to look at:
 (require 'helm-config)
 (helm-mode 1)
 
+(eval-after-load "helm-config" '(diminish 'helm-mode))
+
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-x b") 'helm-mini)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
+(use-package focus
+  :bind ("C-c f" . focus-mode))
+
 ;; will have to see if I like the Golden Ratio...
-(use-package golden-ratio
-  :defer t
-  :config
-  (setq golden-ratio-auto-scale t)
-  (golden-ratio-mode 1))
+;;   (I don't think so.  Ended up uninstalling 2020/02/17)
+;; (use-package golden-ratio
+;;   :defer t
+;;   :config
+;;   (setq golden-ratio-auto-scale t)
+;;  (golden-ratio-mode 1))
 
 ;; resize frames on pixel, not character, boundaries
 (setq frame-resize-pixelwise t)
@@ -505,6 +509,8 @@ undo behavior...
           '((ns-transparent-titlebar . t) 
             (ns-appearance . 'nil)))
     
+    (global-set-key (kbd "M-h") 'ns-do-hide-emacs) ;; this has annoyed me for years <sigh>
+    
       ;; Fira Core seems pretty solid
       ;; I will probably switch to Operator Mono at some point since all the cool kids
       ;; use it...
@@ -592,8 +598,13 @@ undo behavior...
       (message "Linux"))))
 
 ;; Setting transparency; (active . inactive)
-(set-frame-parameter (selected-frame) 'alpha '(98 . 50))  ;; barely transparent when active
+;;(set-frame-parameter (selected-frame) 'alpha '(98 . 50))  ;; barely transparent when active
+;;(set-frame-parameter (selected-frame) 'alpha '(98 . 70))  ;; barely transparent when active
+(set-frame-parameter (selected-frame) 'alpha '(98 . 85))  ;; barely transparent when active
 ;;(set-frame-parameter (selected-frame) 'alpha '(70 . 50))  ;; very transparent when active
+;;(set-frame-parameter (selected-frame) 'alpha '(70 . 50))  ;; very transparent when active
+;; (set-frame-parameter (selected-frame) 'alpha '(100 . 100))  ;; not transparent when active
+
 (add-to-list 'default-frame-alist '(alpha . (98 . 50)))
 
 (tool-bar-mode -1)
@@ -767,7 +778,7 @@ For text folding.  We also add on fold-dwim so we have consistent interface...
   ;;    npm install eslint -g
   ;;    install jsonlint
   ;;
-  (use-package flycheck
+(use-package flycheck
     :defer t
     :diminish flycheck-mode
     :config
@@ -1010,7 +1021,7 @@ Various random functions I've written or swiped from elsewhere.
   ;;                                           'fullboth))) 
 
   ;; This no longer applies...
-  ;;(defun toggle-theme ()
+;;(defun toggle-theme ()
   ;;  "Toggles theme between an inverted and normal theme"
   ;;  (interactive)
   ;;  (if (eq (car (car color-theme-history)) 'color-theme-midnight)

@@ -227,8 +227,8 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 #
 # Mo' bling!   Show line numbers, ANSI escapes, long prompt in "less"
 #
-export LESS='-C -j 10 -RMN'
-export LESSOPEN='|~/bin/lessfilter %s'
+#export LESS='-C -j 10 -RMN'
+#export LESSOPEN='|~/bin/lessfilter %s'
 export PAGER=less
 
 
@@ -342,3 +342,5 @@ fi
 # zprof          # Profile zshrc
 eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

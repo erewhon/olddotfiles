@@ -165,3 +165,5 @@ if command -v neofetch >/dev/null 2>&1; then
     # elif command -v cowsay >/dev/null 2>&1; then
     #     fortune | cowsay
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
