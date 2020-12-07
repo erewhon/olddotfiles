@@ -53,3 +53,9 @@ Using Pyenv:
 
 https://www.jetbrains.com/help/idea/exporting-and-importing-settings.html
 https://unix.stackexchange.com/questions/260813/bash-hushlogin-keep-last-login-time-and-host
+
+rcup
+NOW=$( date +%Y%m%d.%H%M%S )
+mkdir -p ~/.dotfiles-arch/$NOW
+mv -iv ~/.zshrc otherstuf ~/.dotfiles-arch/$NOW
+ln -sv ~/.dotfiles/.zshrc ~
