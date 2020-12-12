@@ -24,7 +24,6 @@ path=(~/bin
       ~/bin.local
       ~/.cargo/bin
       ~/.local/bin
-      # ~/.yarn/bin
       $( go env GOPATH )/bin
       $path)
 
@@ -54,21 +53,6 @@ source ~/.shellrc
 # fi
 
 #  if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
-#
-# nvm - manager for node.js
-#
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
-
-###
-## OCaml
-###
-# OPAM configuration
-[ -s "$HOME/.opam/opam-init/init.zsh" ] && \
-  source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null || true
-
-eval $( opam config env )
 
 #
 # It's the 21st century.  Why are our Unix terminals so boring?  Back
@@ -120,7 +104,6 @@ setopt AUTO_CD                       # You can just type a directory and CD ther
 #   $JIRA_DEFAULT_ACTION - Action to do when jira is called with no arguments; defaults to "new"
 
 plugins=(ant
-         cap
          chucknorris
          # colored-man-pages
          docker
@@ -200,19 +183,6 @@ compdef _hosts bsc
 
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
 
-#
-# Node
-#
-# export NODE_MODULES=/usr/local/share/npm/lib/node_modules
-
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
 [[ -s "$HOME/.dotfiles-local/dotfiles/.zshrc" ]] && source "$HOME/.dotfiles-local/dotfiles/.zshrc"
 [[ -e "${HOME}/.iterm2_shell_integration.zsh" ]]  && source "${HOME}/.iterm2_shell_integration.zsh"
 
@@ -229,8 +199,14 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 #
 #export LESS='-C -j 10 -RMN'
 #export LESSOPEN='|~/bin/lessfilter %s'
-export PAGER=less
 
+if command -v bat &> /dev/null
+then
+    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+    alias less=bat
+else
+    export PAGER=less
+fi
 
 quote() {
     # 0. Show date
@@ -340,7 +316,5 @@ if [[ -o login ]]; then
 fi
 
 # zprof          # Profile zshrc
-eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
-eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
