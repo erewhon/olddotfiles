@@ -13,6 +13,7 @@ alias s=ssh
 alias e='emacsclient --no-wait --create-frame'
 alias gdh='git diff HEAD'
 alias mc='mc -x'
+alias mux=tmuxinator
 
 if command -v rlwrap &> /dev/null; then
     alias rl='rlwrap'

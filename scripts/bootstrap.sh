@@ -7,10 +7,10 @@ TARGET=$HOME/.dotfiles.orig/$NOW/
 
 mkdir -p $TARGET
 
-echo Backing up files
-for f in ~/.zshrc ~/.emacs.d; do
-  mv -iv $f $TARGET
-done
+#echo Backing up files
+#for f in ~/.zshrc ~/.emacs.d ~/.gitignore ~/.shellrc ~/.tmux.conf ~/.vimrc ~/.emacs; do
+#  mv -iv $f $TARGET
+#done
 
 echo Linking in dotfiles
 ln -sv ~/.dotfiles/.emacs     ~/
