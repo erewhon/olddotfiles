@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # zmodload zsh/zprof    # Profile zshrc
 
 #
@@ -61,31 +68,9 @@ source ~/.shellrc
 # to Google, Stackoverflow, and Github Gist's, it's easy!
 #
 
-# Turn on Powerline9k prompt in zsh with plenty o' bling, add custom font
-# for gratuitious icons.
+# Powerline10k
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# if it isnt there, try to clone it
-# git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
-
-ZSH_THEME="powerlevel9k/powerlevel9k"
-
-# https://gist.github.com/kevin-smets/8568070
-# git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
-
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir rbenv vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history battery time)
-POWERLEVEL9K_MODE='nerdfont-complete'
-
-#
-# Fish-like path shortening
-#
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
-POWERLEVEL9K_SHORTEN_DELIMITER=""
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
-
-# Uncommenting the below will suppress my local user in the prompt.   However,
-#   when running Docker locally, it leads to Inception issues.  :-)
-# DEFAULT_USER="erewhon"
 
 ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
@@ -204,6 +189,10 @@ if command -v bat &> /dev/null
 then
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
     alias less=bat
+elif command -v batcat &> /dev/null
+     # Debian-based systems call it "batcat" unfortunately
+     export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
+     alias less=batcat
 else
     export PAGER=less
 fi
@@ -318,3 +307,6 @@ fi
 # zprof          # Profile zshrc
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
