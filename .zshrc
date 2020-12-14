@@ -1,5 +1,5 @@
 #
-# Stuff to only run in interactive shells
+# Stuff to only run in interactive shells and *not* in TMUX?
 #
 if [[ -o login ]]; then
     #
@@ -12,7 +12,9 @@ if [[ -o login ]]; then
         echo $NOW > ~/.last_neofetch
         command -v neofetch >/dev/null 2>&1 && neofetch
     else
-        fortune | parrotsay
+        if [[ -z "$TMUX" ]]; then
+            fortune | parrotsay
+        fi
     fi
 
     # neofetch --size 25% --iterm2 ~/Documents/Pictures/Self/horsing_around.jpg
