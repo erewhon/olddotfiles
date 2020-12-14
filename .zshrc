@@ -147,6 +147,7 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 
 
 if command -v bat &> /dev/null; then
+    export BAT_THEME=Dracula
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
     alias less=bat
     alias gitd='git diff --name-only --diff-filter=d | xargs bat --diff --show-all'
