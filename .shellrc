@@ -10,6 +10,9 @@ alias d=dirs
 alias j=jobs
 alias p=pushd
 alias s=ssh
+alias e='emacsclient --no-wait --create-frame'
+alias gdh='git diff HEAD'
+alias mc='mc -x'
 
 alias gupv='git pull --rebase --autostash -v'
 alias gw='git worktree'
@@ -36,3 +39,74 @@ function sumcount() {
 function batdiff() {
     git diff --name-only --diff-filter=d | xargs bat --diff
 }
+
+#.# Better Git Logs.
+### Using EMOJI-LOG (https://github.com/ahmadawais/Emoji-Log).
+
+# Git Commit, Add all and Push — in one step.
+function gcap() {
+    git add . && git commit -m "$*" && git push
+}
+
+# NEW.
+function gnew() {
+    gcap "📦 NEW: $@"
+}
+
+# IMPROVE.
+function gimp() {
+    gcap "👌 IMPROVE: $@"
+}
+
+# FIX.
+function gfix() {
+    gcap "🐛 FIX: $@"
+}
+
+# RELEASE.
+function grlz() {
+    gcap "🚀 RELEASE: $@"
+}
+
+# DOC.
+function gdoc() {
+    gcap "📖 DOC: $@"
+}
+
+# TEST.
+function gtst() {
+    gcap "✅ TEST: $@"
+}
+
+
+quote() {
+    # 0. Show date
+    # 1. pick a quote source (fortune, zippy?)
+    # 2. pipe it to a viewer (parrotsay, cowsay, pokemonsay, lolcat)
+    fortune | parrotsay
+}
+
+
+if command -v cowsay &> /dev/null
+then
+    gnusay() {
+        cowsay -f gnu "$@"
+    }
+
+    whocall() {
+        cowsay -f ghostbusters Who you Gonna Call | lolcat
+    }
+fi
+
+
+starwars() {
+    nc towel.blinkenlights.nl 23
+}
+
+
+if command -v asciiquarium 1>/dev/null 2>&1; then
+    alias aq=asciiquarium
+fi
+
+growl() { echo -e $'\e]9;'${1}'\007' ; return  ; }
+
