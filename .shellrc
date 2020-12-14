@@ -20,6 +20,10 @@ if command -v rlwrap &> /dev/null; then
     alias nc='rlwrap nc'
 fi
 
+if command -v fzf &> /dev/null; then
+    alias gitb='git branch | fzf-tmux -d 15'
+fi
+
 alias gupv='git pull --rebase --autostash -v'
 alias gw='git worktree'
 

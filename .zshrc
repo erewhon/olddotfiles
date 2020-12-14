@@ -149,12 +149,10 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 if command -v bat &> /dev/null; then
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
     alias less=bat
-elif command -v batcat &> /dev/null; then
-     # Debian-based systems call it "batcat" unfortunately
-     export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
-     alias less=batcat
+    alias gitd='git diff --name-only --diff-filter=d | xargs bat --diff --show-all'
 else
     export PAGER=less
+    alias gitd='git diff'
 fi
 
 
@@ -172,7 +170,25 @@ if [[ -f /etc/motd ]]; then
         tee ~/.hushlogin < /etc/motd
 fi
 
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#
+# Enhanced history
+#   https://raehik.github.io/2014/10/12/record-additional-full-zsh-history/
+#
+zshaddhistory() {
+    # prepend the current epoch time
+    # $1 includes terminating newline already (see zshmisc(1))
+    echo -n "$(date "+%s") $1" >> "$HOME/.zsh_full_history"
+}
+
+# clean up the line when exiting with Ctrl-D                                    
+# if Ctrl-D is hit, there isn't a terminating newline -- so we'll add a  
+# useful message which probably won't ever be written (! specifies an    
+# event, so it'll only work surrounded in quotes                         
+# zshexit() {
+#    echo "!EXIT! $(date "+%s")" >> "$HOME/.zsh_full_history"
+# }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
