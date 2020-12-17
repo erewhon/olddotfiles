@@ -20,5 +20,6 @@ ln -sv ~/.dotfiles/.shellrc   ~/
 ln -sv ~/.dotfiles/.tmux.conf ~/
 ln -sv ~/.dotfiles/.vimrc     ~/
 ln -sv ~/.dotfiles/.zshrc     ~/
+ln -sv ~/.dotfiles/.zshenv    ~/
 ln -sv ~/.dotfiles/.p10k.zsh  ~/
 ln -sv ~/.dotfiles/.fzf.zsh   ~/

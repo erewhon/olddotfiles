@@ -86,6 +86,7 @@ setopt AUTO_CD                       # You can just type a directory and CD ther
 #   $JIRA_DEFAULT_ACTION - Action to do when jira is called with no arguments; defaults to "new"
 
 plugins=(ant
+         aws
          chucknorris
          docker
          extract
