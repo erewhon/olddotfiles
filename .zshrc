@@ -21,6 +21,8 @@ if [[ -o login ]]; then
 fi
 
 
+# XDG_CONFIG_HOME
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -154,9 +156,11 @@ if command -v bat &> /dev/null; then
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
     alias less=bat
     alias gitd='git diff --name-only --diff-filter=d | xargs bat --diff --show-all'
+    tailf() { tail -f "$@" | bat --paging=never -l log }
 else
     export PAGER=less
     alias gitd='git diff'
+    alias tailf='tail -f'
 fi
 
 

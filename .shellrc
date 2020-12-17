@@ -29,6 +29,7 @@ alias gw='git worktree'
 
 # gwb='git worktree add -b foo ../foo origin/master'
 
+# deprecate the below.  Switched to rg
 function gack() { 
   ack -g $* 
 }
@@ -120,3 +121,16 @@ fi
 
 growl() { echo -e $'\e]9;'${1}'\007' ; return  ; }
 
+# __ensure_command() {
+#   command -v $1 &> /dev/null
+# }
+
+doctor() {
+  echo Verifying add-on commands
+  # command -v rlwrap &> /dev/null || ''
+  for cmd in bat exa fx fzf go http jq neofetch node npm rlwrap tmux; do
+      echo -ne "\nchecking for ${cmd}... "
+      command -v $cmd &> /dev/null || echo -n "missing command '${cmd}'"
+  done
+  echo -e "\n\nDone"
+}
