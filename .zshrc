@@ -87,30 +87,32 @@ setopt AUTO_CD                       # You can just type a directory and CD ther
 #   $JIRA_RAPID_BOARD - Set to true if you use Rapid Board
 #   $JIRA_DEFAULT_ACTION - Action to do when jira is called with no arguments; defaults to "new"
 
-plugins=(ant
+plugins=(ansible     # aliases of note: a
          aws
-         chucknorris
+         bgnotify    # requires terminal-notifier
+         brew        # aliases of note: brews, bubo, bubu
+         chucknorris # chuck, chuck_cow
          docker
-         extract
-         git
+         git         # aliases of note: g, ga, gcmsg, gdca
+                     #   grup, ggpull, glg, glgp, glo, glol,
+                     #   gupa
          golang
-         gradle
+         gradle      # can just type 'gradle' and it will use wrapper
          httpie
          history
          jira
-         lein
+         kubectl
+         microk8s
+         mosh
          npm
-         osx
-         perl
-         repo
+         # osx       # haven't used this in ages
+         # perl
+         ripgrep
          supervisor
-         svn
          tmux
          yarn
          zsh-autosuggestions   # Fish-like auto suggestions
         )
-
-zstyle :omz:plugins:ssh-agent identities id_rsa inet_rsa id_ecdsa
 
 # User configuration
 
