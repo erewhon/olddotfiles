@@ -34,18 +34,16 @@ fi
 # Zsh config.   A lot of oh-my-zsh, a lot of other things...
 #
 
+export MANPATH="/usr/local/man:$MANPATH"
+
 # add elements to path, uniquely
 typeset -U path
 
 # first, add "system" paths
 path=(/usr/local/bin
       /usr/local/sbin
+      /snap/bin
       $path)
-
-#
-# Set up different languages
-#
-export MANPATH="/usr/local/man:$MANPATH"
 
 # set up "local" paths
 path=(~/bin
@@ -55,12 +53,14 @@ path=(~/bin
       ~/.local/bin
       $path)
 
+#
+# Set up different languages
+#
 if command -v go &> /dev/null; then
     export GOPATH=$( go env GOPATH )
     path=($( go env GOPATH )/bin $path)
 
 fi
-
 
 source ~/.shellrc
 
