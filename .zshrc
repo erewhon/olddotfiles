@@ -198,7 +198,7 @@ zshaddhistory() {
 #    echo "!EXIT! $(date "+%s")" >> "$HOME/.zsh_full_history"
 # }
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh -a -f /usr/local/opt/fzf/shell/key-bindings.zsh ] && source ~/.fzf.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
