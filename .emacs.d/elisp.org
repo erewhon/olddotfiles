@@ -660,11 +660,11 @@ Attempts to set the indentation level (number of spaces for an indent) for a maj
   ;; auto-indent-untabify-on-visit-file
   ;; auto-indent-kill-remove-extra-spaces
 
-  (use-package auto-indent-mode
-      :defer t
-      :init
-      ;; (setq auto-indent-on-visit-file t)
-      (auto-indent-global-mode))
+;;  (use-package auto-indent-mode
+;;      :defer t
+;;      :init
+;;      ;; (setq auto-indent-on-visit-file t)
+;;      (auto-indent-global-mode))
 
 #+END_SRC
 
