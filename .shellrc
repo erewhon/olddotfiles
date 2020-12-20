@@ -138,3 +138,49 @@ doctor() {
 append_ssh_key() {
     ssh $1 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
 }
+
+function autotmux {
+    autossh -M 0 -t $1 'tmux -2 attach -d'
+}
+
+#
+# Mac-specific things
+#
+function display_notify() {
+    /usr/bin/osascript -e "display notification \"$*\""
+}
+
+function send() {
+    osascript -e 'tell application "System Events" to keystroke "'"$*"'"'
+    display_notify "sent string" with title "zshrc"
+}
+
+function send_slow() {
+    cat <<EOF | osascript -
+    set texttowrite to "$*"
+    tell application "System Events"
+       repeat with i from 1 to count characters of texttowrite
+           keystroke (character i of texttowrite)
+           delay 0.04
+       end repeat
+    end tell
+EOF
+}
+
+function send_slow_file() {
+   cat $* | while read line
+   do
+       send_slow "$line"
+       osascript -e 'tell application "System Events" to keystroke return'
+   done
+}
+
+function send_slow_multiline() {
+   sleep 5
+   while read line
+   do
+       send_slow "$line"
+       osascript -e 'tell application "System Events" to keystroke return'
+   done
+}
+

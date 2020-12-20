@@ -39,18 +39,15 @@ export MANPATH="/usr/local/man:$MANPATH"
 # add elements to path, uniquely
 typeset -U path
 
-# first, add "system" paths
-path=(/usr/local/bin
+# set up paths
+path=(~/bin               # link to ~/.dotfiles/bin
+      ~/bin/$( uname -s ) # deprecate
+      ~/bin.local         # deprecate / consolidate
+      ~/.cargo/bin
+      ~/.local/bin        # local binaries
+      /usr/local/bin
       /usr/local/sbin
       /snap/bin
-      $path)
-
-# set up "local" paths
-path=(~/bin
-      ~/bin/$( uname -s )
-      ~/bin.local
-      ~/.cargo/bin
-      ~/.local/bin
       $path)
 
 #
@@ -62,7 +59,7 @@ if command -v go &> /dev/null; then
 
 fi
 
-source ~/.shellrc
+source ~/.shellrc      # move to ~/.dotfiles path to eliminate need for symlink!
 
 #
 # It's the 21st century.  Why are our Unix terminals so boring?  Back
@@ -73,7 +70,6 @@ source ~/.shellrc
 
 # Powerline10k
 ZSH_THEME="powerlevel10k/powerlevel10k"
-
 
 ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
@@ -105,8 +101,6 @@ plugins=(ansible     # aliases of note: a
          microk8s
          mosh
          npm
-         # osx       # haven't used this in ages
-         # perl
          ripgrep
          supervisor
          tmux
@@ -140,11 +134,6 @@ compdef _hosts asc
 compdef _hosts bsc
 
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
-
-[[ -s "$HOME/.dotfiles-local/dotfiles/.zshrc" ]] && source "$HOME/.dotfiles-local/dotfiles/.zshrc"
-[[ -e "${HOME}/.iterm2_shell_integration.zsh" ]]  && source "${HOME}/.iterm2_shell_integration.zsh"
-
-[[ -s "$HOME/.zshrc-local" ]] && source "$HOME/.zshrc-local"
 
 #
 # Syntax highlighting of command-line ala "fish"
@@ -197,6 +186,8 @@ zshaddhistory() {
 # zshexit() {
 #    echo "!EXIT! $(date "+%s")" >> "$HOME/.zsh_full_history"
 # }
+
+[[ -s "$HOME/.zshrc-local" ]] && source "$HOME/.zshrc-local"
 
 [ -f ~/.fzf.zsh -a -f /usr/local/opt/fzf/shell/key-bindings.zsh ] && source ~/.fzf.zsh
 
