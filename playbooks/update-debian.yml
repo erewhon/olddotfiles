@@ -1,0 +1,26 @@
+#
+# Playbook for updating 
+#
+# remote user can vary (ubuntu, pi, or my own ID)
+#
+# To run:
+#
+#   env ANSIBLE_COW_SELECTION=random
+#   env ANSIBLE_NOCOWS=1
+#   ansible-playbook update-debian.yml -i hosts
+#
+# To verify:
+#   ansible-lint update-debian.yml
+#
+# To encrypt / decrypt credentials:
+#   ansible-vault [encrypt|decrypt] --vault-password-file=whatever init/foo.env
+#
+
+---
+- become: yes
+  become_method: sudo
+
+  tasks:
+    - debug:
+        msg: System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}
+  
