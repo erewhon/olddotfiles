@@ -13,11 +13,11 @@ alias s=ssh
 alias e='emacsclient --no-wait --create-frame'
 alias gdh='git diff HEAD'
 alias mc='mc -x'
-# alias mux=tmuxinator
+alias play=ansible-playbook
 
 TMUX_VERSION=$( tmux -V | awk '{print $2}' )
 
-if [[ "$TMUX_VERSION" -eq "next-3.3" ]]; then
+if [[ "$TMUX_VERSION" == "next-3.3" ]]; then
     alias wx='tmux popup -w 150 -h 45 -KR "curl wttr.in/Houston"'
 else
     alias wx='curl wttr.in/Houston'
