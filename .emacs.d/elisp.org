@@ -26,6 +26,11 @@ package manager and use-package) in 2017.  I know... you probably
 don't care, but I like remember these things.  And some of the files
 were in a source repo where I am unsure of where the history is...
 
+** Todo
+
+- [ ] move to FuraCode or JetBrains Mono if possible?
+- [ ] Nordic color scheme?
+
 ** Things I'm Still Learning (or re-learning)
 
 M-;   - comment-dwim (2012-11-22)
@@ -490,9 +495,13 @@ undo behavior...
 ;;
 ;; Tweak the UI
 ;;
-(use-package atom-one-dark-theme
+;;(use-package atom-one-dark-theme
+;;  :init
+;;  (load-theme 'atom-one-dark t))
+
+(use-package nord-theme
   :init
-  (load-theme 'atom-one-dark t))
+  (load-theme 'nord t))
 
 ;; check OS type, and make platform-specific changes appropriately
 (cond
@@ -627,7 +636,7 @@ First, we tweak a number of Emacs defaults to our liking.  Then, we specify, and
 ;; XXX FIX!!!
 ;;(global-linum-mode -1)
 (global-display-line-numbers-mode 1)
-                                    ;; show line numbers along side
+;; show line numbers along side
   (setq-default indent-tabs-mode nil)                       ;; Don't EVAR use tabs!
   (setq-default tab-always=indent 'complete)
 
@@ -676,6 +685,17 @@ For text folding.  We also add on fold-dwim so we have consistent interface...
 
 (use-package yafolding :defer t)
   
+#+END_SRC
+
+** Generic Programming Language functionality
+
+#+BEGIN_SRC emacs-lisp
+
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
+
 #+END_SRC
 
 ** Org mode (woo-hoo)   :review:
@@ -751,13 +771,9 @@ For text folding.  We also add on fold-dwim so we have consistent interface...
 
 #+END_SRC
 
-** Source control: Git and Gitlab
+** Source control: Git
 
 #+BEGIN_SRC emacs-lisp
-
-  ;; https://github.com/nlamirault/emacs-gitlab
-  (use-package gitlab
-     :defer t)
 
   (use-package git-commit
      :defer t)
