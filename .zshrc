@@ -189,7 +189,11 @@ zshaddhistory() {
 
 [[ -s "$HOME/.zshrc-local" ]] && source "$HOME/.zshrc-local"
 
+# On Mac
 [ -f ~/.fzf.zsh -a -f /usr/local/opt/fzf/shell/key-bindings.zsh ] && source ~/.fzf.zsh
+
+# On Debian-based system
+[ -f ~/.fzf.zsh -a -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
