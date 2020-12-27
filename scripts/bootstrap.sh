@@ -23,3 +23,8 @@ ln -sv ~/.dotfiles/.zshrc     ~/
 ln -sv ~/.dotfiles/.zshenv    ~/
 ln -sv ~/.dotfiles/.p10k.zsh  ~/
 ln -sv ~/.dotfiles/.fzf.zsh   ~/
+
+if command -v julia &> /dev/null; then
+    mkdir -p ~/.julia/config
+    ln -sv ~/.dotfiles/julia/startup.jl ~/.julia/config/startup.jl
+fi
