@@ -285,9 +285,9 @@ Things to look at:
   ;;(telephone-line-mode -1)
   (telephone-line-mode 1))
 
-(use-package telephone-line
-  :config
-  (my-telephone-line-customization))
+;;(use-package telephone-line
+;;  :config
+;;  (my-telephone-line-customization))
 
 ;; https://github.com/purcell/exec-path-from-shell
 (when (memq window-system '(mac ns x))
@@ -504,7 +504,9 @@ undo behavior...
   :init
   (load-theme 'nord t))
 
+;;
 ;; check OS type, and make platform-specific changes appropriately
+;;
 (cond
  ((string-equal system-type "windows-nt") ; Microsoft Windows
   (progn
@@ -525,7 +527,10 @@ undo behavior...
       ;; I will probably switch to Operator Mono at some point since all the cool kids
       ;; use it...
       ;; (set-face-attribute 'default nil :family "Fira Code")   
-    ;; (set-face-attribute 'default nil :family "FuraCode Nerd Font Mono Light")
+      ;; (set-face-attribute 'default nil :family "FuraCode Nerd Font Mono Light")
+      ;; (set-face-attribute 'default nil :family "FuraCode Nerd Font Mono")
+      ;; (set-face-attribute 'default nil :family "JetBrains Mono")
+      (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font")
       ;; (set-face-attribute 'default nil :family "Fira Sans")
       ;; (set-face-attribute 'default nil :family "Verdana")   ;; test fonts...
       ;; (set-face-attribute 'default nil :family "Menlo")
@@ -898,6 +903,15 @@ port these over to C
   
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+  
+  (use-package gradle-mode
+    :defer t
+    :config
+    (gradle-mode 1))
+
+#+END_SRC
+
 ** Javascript
 
 Better Javascript mode.
@@ -946,6 +960,24 @@ why doesn't smart complete work?
   (setq eshell-review-quick-commands nil)
   (setq eshell-smart-space-goes-to-end t)
   (setq eshell-save-history-on-exit t)
+
+#+END_SRC
+
+//-*- mode: groovy -*-
+
+#+BEGIN_SRC emacs-lisp
+
+;;(use-package vterm
+;;    :ensure t)
+
+;;
+;; Use local build (for now) if it exists.
+;;
+(if (file-directory-p "~/Software/emacs-libvterm/")
+  (use-package vterm
+    :load-path  "~/Software/emacs-libvterm/"))
+
+;; todo : bind vterm or eshell to key sequence
 
 #+END_SRC
 
@@ -1006,7 +1038,7 @@ Especially for languages with closures.
   (electric-indent-mode 1)
   (show-paren-mode 1)
   (column-number-mode 1)
-  (display-time-mode 1)
+  ;; (display-time-mode 1)    ;; This shows time, load average, and mail status.
 
 #+END_SRC
 

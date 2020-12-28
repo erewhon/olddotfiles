@@ -1,0 +1,4 @@
+- name: Run the equivalent of "apt-get update" as a separate step (but only if more than 900 seconds ago)
+  apt:
+    update_cache: yes
+    cache_valid_time: 900
