@@ -1,5 +1,6 @@
+# -*- Mode: yaml -*-
 #
-# Playbook for updating 
+# Playbook for updating
 #
 # remote user can vary (ubuntu, pi, or my own ID)
 #
@@ -17,10 +18,10 @@
 #
 
 ---
-- become: yes
+- hosts: debian
+  become: yes
   become_method: sudo
+  gather_facts: false
 
   tasks:
-    - debug:
-        msg: System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}
-  
+    - include_tasks: tasks/debug.yml

@@ -29,7 +29,8 @@ were in a source repo where I am unsure of where the history is...
 ** Todo
 
 - [ ] move to FuraCode or JetBrains Mono if possible?
-- [ ] Nordic color scheme?
+- [ ] simplify task bar!   remove some of the bling.
+- [X] Nordic color scheme?
 
 ** Things I'm Still Learning (or re-learning)
 
