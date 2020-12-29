@@ -1,0 +1,8 @@
+#!/bin/bash
+# -*- Mode: shell-script -*-
+#
+
+SOCKET=/var/folders/7c/jfdn47_j61700jl2jdgwz_gh0000gn/T/emacs501/server
+
+# mv ${SOCKET} ${SOCKET}.original
+socat -t100 -v UNIX-LISTEN:${SOCKET},mode=777,reuseaddr,fork UNIX-CONNECT:${SOCKET}.original

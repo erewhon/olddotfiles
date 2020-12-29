@@ -148,6 +148,12 @@ if command -v bat &> /dev/null; then
     alias less=bat
     alias gitd='git diff --name-only --diff-filter=d | xargs bat --diff --show-all'
     tailf() { tail -f "$@" | bat --paging=never -l log }
+elif [ -x /usr/bin/bat ]; then
+    export BAT_THEME=Dracula
+    export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
+    alias less=batcat
+    alias gitd='git diff --name-only --diff-filter=d | xargs batcat --diff --show-all'
+    tailf() { tail -f "$@" | batcat --paging=never -l log }
 else
     export PAGER=less
     alias gitd='git diff'
