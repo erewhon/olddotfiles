@@ -1,16 +1,17 @@
 [user]
 	name = Steven Byrnes
 	email = steven@byrnes.org
+
 [pull]
         ff = only
+
+[diff]
+    colorMoved = default
 
 [core]
     pager = delta
 
 [delta]
-#    plus-color = "#012800"
-#    minus-color = "#340001"
-#    syntax-theme = Monokai Extended
      syntax-theme = Dracula
      line-numbers = true
 #    side-by-side = true
