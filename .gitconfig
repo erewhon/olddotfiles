@@ -1,0 +1,22 @@
+[user]
+	name = Steven Byrnes
+	email = steven@byrnes.org
+[pull]
+        ff = only
+
+[core]
+    pager = delta
+
+[delta]
+#    plus-color = "#012800"
+#    minus-color = "#340001"
+#    syntax-theme = Monokai Extended
+     syntax-theme = Dracula
+     line-numbers = true
+#    side-by-side = true
+
+[interactive]
+     diffFilter = delta --color-only
+
+[include]
+     path = ~/.gitconfig-local
