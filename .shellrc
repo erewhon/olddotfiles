@@ -27,6 +27,10 @@ function mux() {
     tmux new-session -A -s $1
 }
 
+if command -v fd-find &> /dev/null; then
+    alias fd=fd-find
+fi
+
 if command -v rlwrap &> /dev/null; then
     alias rl='rlwrap'
     alias nc='rlwrap nc'
@@ -142,7 +146,7 @@ growl() { echo -e $'\e]9;'${1}'\007' ; return  ; }
 doctor() {
   echo Verifying add-on commands
   # command -v rlwrap &> /dev/null || ''
-  for cmd in bat delta exa fx fzf go http jq neofetch node npm rlwrap tmux; do
+  for cmd in bat delta exa fd fx fzf go http jq neofetch node npm rlwrap tmux; do
       echo -ne "\nchecking for ${cmd}... "
       command -v $cmd &> /dev/null || echo -n "missing command '${cmd}'"
   done
