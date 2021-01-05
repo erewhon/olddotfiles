@@ -195,6 +195,7 @@ Things to look at:
   :defer t)
 
 (use-package org-pomodoro
+  :defer t
   :bind (("C-c p" . org-pomodoro)))
 (setq org-pomodoro-short-break-length 11)
 (setq org-pomodoro-length 49)
