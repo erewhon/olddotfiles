@@ -316,6 +316,12 @@ Things to look at:
 ;;        (add-hook 'direct-mode-hook 'set-buffer-fixed-pitch)
 ;;      (remove-hook 'dired-mode-hook 'set-buffer-fixed-patch)
 
+;;
+;; REST mode
+;;
+(use-package restclient
+  :defer t)
+
 #+END_SRC
 
 https://github.com/JAremko/docker-emacs
@@ -799,7 +805,7 @@ For text folding.  We also add on fold-dwim so we have consistent interface...
   ;;
   ;;    pip install pylint
   ;;    npm install eslint -g
-  ;;    install jsonlint
+;;    install jsonlint
   ;;
 (use-package flycheck
     :defer t
