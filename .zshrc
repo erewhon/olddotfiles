@@ -35,6 +35,8 @@ fi
 #
 
 export MANPATH="/usr/local/man:$MANPATH"
+export DISABLE_AUTO_UPDATE="true"         # Do not auto update oh my zsh
+                                          # Run "omz update" to manually update.
 
 # add elements to path, uniquely
 typeset -U path
@@ -165,6 +167,10 @@ if command -v exa 1>/dev/null 2>&1; then
     alias ll='exa -abghHl --time-style=long-iso'
     alias lll='exa -abghHl --time-style=long-iso --extended --git'
     alias tree='exa -abghHl --time-style=long-iso --tree --level=3'
+fi
+
+if command -v zoxide 1>/dev/null 2>&1; then
+    eval "$(zoxide init zsh)"
 fi
 
 #
