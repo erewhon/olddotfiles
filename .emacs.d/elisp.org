@@ -624,7 +624,7 @@ undo behavior...
 ;;(set-frame-parameter (selected-frame) 'alpha '(98 . 70))  ;; barely transparent when active
 (set-frame-parameter (selected-frame) 'alpha '(98 . 85))  ;; barely transparent when active
 ;;(set-frame-parameter (selected-frame) 'alpha '(70 . 50))  ;; very transparent when active
-;;(set-frame-parameter (selected-frame) 'alpha '(70 . 50))  ;; very transparent when active
+;;(set-frame-parameter (selected-frame) 'alpha '(90 . 50))  ;; very transparent when active
 ;; (set-frame-parameter (selected-frame) 'alpha '(100 . 100))  ;; not transparent when active
 
 (add-to-list 'default-frame-alist '(alpha . (98 . 50)))
