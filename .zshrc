@@ -1,3 +1,28 @@
+arch_name="$(uname -m)"
+os_name="$(uname -s)"
+
+if [[ "${os_name}" == "Darwin" ]]; then
+    # MacOS.  Distinguish between M1 and x86.
+    if [[ "${arch_name}" == "arm64" ]]; then
+        export HOMEBREW_PREFIX="/opt/homebrew";
+        export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+        export HOMEBREW_REPOSITORY="/opt/homebrew";
+        export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+        export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+        export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
+    else
+        export HOMEBREW_PREFIX="/usr/local";
+        export HOMEBREW_CELLAR="/usr/local/Cellar";
+        export HOMEBREW_REPOSITORY="/usr/local/Homebrew";
+        export PATH="/usr/local/bin:/usr/local/sbin${PATH+:$PATH}";
+        export MANPATH="/usr/local/share/man${MANPATH+:$MANPATH}:";
+        export INFOPATH="/usr/local/share/info:${INFOPATH:-}";
+    fi
+else
+    # For Linux and others, we add /usr/local/bin and /usr/local/sbin unconditionally
+    export PATH="/usr/local/bin:/usr/local/sbin${PATH+:$PATH}";
+fi
+
 #
 # Stuff to only run in interactive shells and *not* in TMUX?
 #
@@ -47,8 +72,8 @@ path=(~/bin               # link to ~/.dotfiles/bin
       ~/bin.local         # deprecate / consolidate
       ~/.cargo/bin
       ~/.local/bin        # local binaries
-      /usr/local/bin
-      /usr/local/sbin
+      # /usr/local/bin
+      # /usr/local/sbin
       /snap/bin
       $path)
 
@@ -209,3 +234,20 @@ zshaddhistory() {
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# add arch to prompt.  look at powrelevel10
+
+# if [ "${arch_name}" = "x86_64" ]; then
+#     if [ "$(sysctl -in sysctl.proc_translated)" = "1" ]; then
+#         echo "Running on Rosetta 2"
+#     else
+#         echo "Running on native Intel"
+#     fi 
+# elif [ "${arch_name}" = "arm64" ]; then
+#     echo "Running on ARM"
+# else
+#     echo "Unknown architecture: ${arch_name}"
+# fi
+# 
+# return
+
