@@ -16,17 +16,31 @@
 #       --user erewhon \
 #       -v ~/.zsh_history:/u/erewhon/.zsh_history \
 #       -v ~/.ssh:/u/erewhon/.ssh \
+#
+# --pid host    - for some reason this started causing issues
+#
 
-mkdir -p $HOME/.ds
+ALT_HOME=${ALT_HOME:=$HOME/.ds}
 
-OTHER_ARGS="--pid host --user $( id -u ):$( id -g )"
+mkdir -p $ALT_HOME
+
+OTHER_ARGS="--user $( id -u ):$( id -g )"
+
+if [[ -e /var/run/docker.sock ]]; then
+    OTHER_ARGS+=" -v /var/run/docker.sock:/var/run/docker.sock"
+fi
+
+if [[ -e /sys/fs/cgroup ]]; then
+    OTHER_ARGS+=" -v /sys/fs/cgroup:/sys/fs/cgroup:ro"
+fi
 
 exec docker run \
        $OTHER_ARGS \
        --detach-keys="ctrl-@" \
        --hostname $( hostname -s ) \
        -v $HOME/.ssh:/u/erewhon/.ssh:ro \
-       -v $HOME/.ds:/u/erewhon \
+       -v $ALT_HOME:/u/erewhon \
        -it \
        --rm \
        devshell
+

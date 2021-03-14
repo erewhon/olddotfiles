@@ -43,6 +43,9 @@ if [[ -o login ]]; then
     fi
 
     # neofetch --size 25% --iterm2 ~/Documents/Pictures/Self/horsing_around.jpg
+
+    # figlet -w 200-k -f "$(brew --prefix)/share/figlet/fonts/larry3d.flf" "$(printf '%.0s ' {0..5})Hey,"
+    # figlet -w 200 -k -f "$(brew --prefix)/share/figlet/fonts/larry3d.flf" "$(printf '%.0s ' {0..5})$(whoami)"
 fi
 
 
@@ -243,9 +246,11 @@ zshaddhistory() {
 #
 # experimental: McFly.  Need to troubleshoot why this sometimes doesn't seem to bind!
 #
-export MCFLY_FUZZY=true
-# eval "$(mcfly init zsh)"
-[[ ! -f ~/.dotfiles/mcfly.zsh ]] || source ~/.dotfiles/mcfly.zsh
+if command -v mcfly &> /dev/null; then
+    # export MCFLY_FUZZY=true
+    # eval "$(mcfly init zsh)"
+    [[ ! -f ~/.dotfiles/mcfly.zsh ]] || source ~/.dotfiles/mcfly.zsh
+fi
 
 #
 # Make sure things are bound correctly!  (But why!?)
