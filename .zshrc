@@ -48,6 +48,8 @@ fi
 
 # XDG_CONFIG_HOME
 
+
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -136,6 +138,9 @@ plugins=(ansible     # aliases of note: a
         )
 
 # User configuration
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
 
 export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
@@ -227,13 +232,26 @@ zshaddhistory() {
 [[ -s "$HOME/.zshrc-local" ]] && source "$HOME/.zshrc-local"
 
 # On Mac
-[ -f ~/.fzf.zsh -a -f /usr/local/opt/fzf/shell/key-bindings.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh -a -f /usr/local/opt/fzf/shell/key-bindings.zsh ] && source ~/.fzf.zsh
 
 # On Debian-based system
-[ -f ~/.fzf.zsh -a -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
+# [ -f ~/.fzf.zsh -a -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+#
+# experimental: McFly.  Need to troubleshoot why this sometimes doesn't seem to bind!
+#
+export MCFLY_FUZZY=true
+# eval "$(mcfly init zsh)"
+[[ ! -f ~/.dotfiles/mcfly.zsh ]] || source ~/.dotfiles/mcfly.zsh
+
+#
+# Make sure things are bound correctly!  (But why!?)
+#
+# bindkey '^R' mcfly-history-widget
+
 
 # add arch to prompt.  look at powrelevel10
 

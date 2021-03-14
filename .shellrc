@@ -39,7 +39,7 @@ fi
 if command -v fzf &> /dev/null; then
     alias gitb='git branch | fzf-tmux -d 15'
     # fuzzy preview
-    alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+    alias fp="fzf --preview 'bat --style=full --color=always --line-range :500 {}' --preview-window '~3'"
     # Setting rg as the default source for fzf
     # export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
 
@@ -52,13 +52,19 @@ if command -v fzf &> /dev/null; then
             --ansi --disabled --query "$INITIAL_QUERY" \
             --layout=reverse \
             --delimiter : \
-            --preview 'bat --style=numbers --show-all --color=always --highlight-line {2} {1}' \
-            --preview-window +{2}-/2
+            --preview 'bat --style=full --show-all --color=always --highlight-line {2} {1}' \
+            --preview-window '~3:+{2}+3/2'
         }
 
     # git history preview
     alias ghp="git log --oneline | fzf --multi --preview 'git show {+1}'"
+
+    function gdp() {
+        preview="git diff $@ --color=always -- {-1}"
+        git diff $@ --name-only | fzf -m --ansi --preview $preview
+    }
 fi
+
 
 alias gupv='git pull --rebase --autostash -v'
 alias gw='git worktree'
