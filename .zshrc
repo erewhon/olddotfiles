@@ -37,8 +37,13 @@ if [[ -o login ]]; then
         echo $NOW > ~/.last_neofetch
         command -v neofetch >/dev/null 2>&1 && neofetch
     else
-        if [[ -z "$TMUX" ]]; then
-            fortune | parrotsay
+        if command -v fortune &> /dev/null; then
+            if [[ -z "$TMUX" ]]; then
+                fortune | parrotsay
+            fi
+        else
+            # If fortunate isn't available, just unconditionally show neofetch?
+            command -v neofetch >/dev/null 2>&1 && neofetch
         fi
     fi
 
