@@ -38,7 +38,7 @@ exec docker run \
        $OTHER_ARGS \
        --detach-keys="ctrl-@" \
        --hostname $( hostname -s ) \
-       -v $HOME/.ssh:/u/erewhon/.ssh:ro \
+       -v $HOME/.ssh:/u/erewhon/.ssh \
        -v $ALT_HOME:/u/erewhon \
        -it \
        --rm \
