@@ -1,0 +1,10 @@
+#!/bin/bash
+# -*- Mode: shell-script -*-
+
+# Gets all containers and prints out path to log file, size, and which container
+#
+
+SUDO=${DOCKER_SUDO:-}
+
+$SUDO docker inspect --format='{{.LogPath}} {{.Name}}' $($SUDO docker ps -a -q) |
+    perl -ane 'chomp(my $du = qx{sudo du -hs $F[0]}); print $du, " ", $F[1], "\n"'

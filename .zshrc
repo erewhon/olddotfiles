@@ -122,7 +122,7 @@ setopt AUTO_CD                       # You can just type a directory and CD ther
 
 plugins=(ansible     # aliases of note: a
          aws
-         bgnotify    # requires terminal-notifier
+         # bgnotify  # requires terminal-notifier.  Notify after long running commands
          brew        # aliases of note: brews, bubo, bubu
          chucknorris # chuck, chuck_cow
          docker
@@ -202,7 +202,7 @@ fi
 
 
 if command -v exa 1>/dev/null 2>&1; then
-    alias ll='exa -abghHl --time-style=long-iso'
+    alias ll='exa -abghHl --time-style=long-iso --git'
     alias lll='exa -abghHl --time-style=long-iso --extended --git'
     alias tree='exa -abghHl --time-style=long-iso --tree --level=3'
 fi
