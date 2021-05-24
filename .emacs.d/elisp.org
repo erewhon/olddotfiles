@@ -627,7 +627,7 @@ undo behavior...
 ;;(set-frame-parameter (selected-frame) 'alpha '(70 . 50))  ;; very transparent when active
 ;;(set-frame-parameter (selected-frame) 'alpha '(90 . 50))  ;; very transparent when active
 ;; (set-frame-parameter (selected-frame) 'alpha '(100 . 100))  ;; not transparent when active
-;;(set-frame-parameter (selected-frame) 'alpha '(70 . 50))  ;; very transparent when active
+;;(set-frame-parameter (selected-frame) 'alpha '(80 . 50))  ;; very transparent when active
 (set-frame-parameter (selected-frame) 'alpha '(100 . 100))  ;; not transparent when active
 
 (add-to-list 'default-frame-alist '(alpha . (98 . 50)))
@@ -646,7 +646,7 @@ First, we tweak a number of Emacs defaults to our liking.  Then, we specify, and
   
   (message "Text handling")
   
-  (autoload 'longlines-mode "longlines.el" "Minor mode for editing long lines." t)
+  ;;;(autoload 'longlines-mode "longlines.el" "Minor mode for editing long lines." t)
   
   (text-scale-increase 1)                                   ;; text-scale-normal-size to restore
 ;; XXX FIX!!!
