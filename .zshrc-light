@@ -1,0 +1,38 @@
+#
+# light zsh - no homebrew, no oh my zsh
+#
+
+# path=(~/bin)
+
+# aliases
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ,=popd
+alias c=cd
+alias d=dirs
+alias j=jobs
+alias p=pushd
+alias s=ssh
+
+#
+# Environment settings
+#
+ENABLE_CORRECTION="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+HIST_STAMPS="yyyy-mm-dd"
+setopt AUTO_CD                       # You can just type a directory and CD there
+
+export HISTSIZE=1000000
+export SAVEHIST=$HISTSIZE
+export HISTFILE=~/.zsh_history
+export HISTTIMEFORMAT="[%F %T] "
+
+setopt EXTENDED_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_FIND_NO_DUPS
+
+PROMPT='%(?.%F{green}√.%F{red}?%?)%f %B%F{magenta}%1~%f%b %# '
+RPROMPT='%*'
+
+compdef _hosts asc
+compdef _hosts bsc
