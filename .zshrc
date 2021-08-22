@@ -82,6 +82,7 @@ path=(~/bin               # link to ~/.dotfiles/bin
       ~/bin.local         # deprecate / consolidate
       ~/.cargo/bin
       ~/.local/bin        # local binaries
+      ~/Library/Python/3.9/bin
       # /usr/local/bin
       # /usr/local/sbin
       /snap/bin

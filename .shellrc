@@ -27,6 +27,10 @@ function mux() {
     tmux new-session -A -s $1
 }
 
+function imux() {
+    tmux -CC new-session -A -s $1
+}
+
 if command -v fd-find &> /dev/null; then
     alias fd=fd-find
 fi
