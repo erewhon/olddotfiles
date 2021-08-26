@@ -30,21 +30,23 @@ if [[ -o login ]]; then
     #
     # We don't want to go overboard (honest!), so display neofetch once per day, then fortune
     #
-    NOW=$( date +%F )
+    NOW=$( date +'%F %H:%M' )
 
     if ! cmp -s ~/.last_neofetch <( echo $NOW )
     then
         echo $NOW > ~/.last_neofetch
-        command -v neofetch >/dev/null 2>&1 && neofetch
+        command -v neofetch >/dev/null 2>&1 && neofetch --iterm2 ~/Documents/Pictures/Backgrounds/Unsplash/
     else
-        if command -v fortune &> /dev/null; then
-            if [[ -z "$TMUX" ]]; then
-                fortune | parrotsay
-            fi
-        else
-            # If fortunate isn't available, just unconditionally show neofetch?
-            command -v neofetch >/dev/null 2>&1 && neofetch
-        fi
+        # do nothing...   nice and clean!
+        
+        # if command -v fortune &> /dev/null; then
+        #     if [[ -z "$TMUX" ]]; then
+        #         fortune | parrotsay
+        #     fi
+        # else
+        #     # If fortunate isn't available, just unconditionally show neofetch?
+        #     command -v neofetch >/dev/null 2>&1 && neofetch
+        # fi
     fi
 
     # neofetch --size 25% --iterm2 ~/Documents/Pictures/Self/horsing_around.jpg
