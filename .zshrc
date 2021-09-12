@@ -88,6 +88,7 @@ path=(~/bin               # link to ~/.dotfiles/bin
       # /usr/local/bin
       # /usr/local/sbin
       /snap/bin
+      ~/.emacs.d/bin
       $path)
 
 #
