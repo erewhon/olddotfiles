@@ -53,3 +53,76 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+
+;;
+;; Select properties brought over from old elisp.org
+;;
+
+(set-face-attribute 'default nil :family "JetBrainsMono Nerd Font")
+(set-face-attribute 'default nil :height 140)
+
+(cond
+ ((string-equal system-type "darwin") ; Mac OS X
+  (progn
+   (setq mac-command-modifier 'meta)
+   (setq mac-option-modifier 'super)
+   (message "Darwin"))))
+
+;; (setq mac-option-key-is-meta t)
+;; (setq mac-option-modifier 'alt)
+;;    (setq mac-command-modifier 'meta)
+
+
+;; set custom keysequences
+
+;; Change cursor blinking.   nil to turn off
+(blink-cursor-mode t)
+;; Cursor (to make consistent with terminal).  'box is default
+(setq-default cursor-type 'bar)
+
+;; todo:
+;; - turn on minimap by default
+;;
+
+(setq calendar-location-name "Houston, TX")
+(setq calendar-latitude 29.7)
+(setq calendar-longitude -95.3)
+
+;;
+;; Remember desktop buffers, and save periodically
+;;   (we run this near the end so all major modes are properly loaded...)
+;;
+;; (desktop-save-mode 1)                                     ;; automatically load buffers from last session
+
+;;(setq history-length 50)
+
+;;(add-to-list 'desktop-globals-to-save 'file-name-history) ;; also save file history
+
+;; Things not to include in desktop
+;; (delete 'file-name-history desktop-globals-to-save
+
+;; (setq desktop-restore-frames nil)                         ;; Don't save frame and window configuration
+
+;;  (setq desktop-restore-eager 0))                            ;; eagerly restore no buffers; lazy-load all of them
+
+;; todo:
+;; - turn on minimap by default
+;;
+
+;;
+;; Remember desktop buffers, and save periodically
+;;   (we run this near the end so all major modes are properly loaded...)
+;;
+;; (desktop-save-mode 1)                                     ;; automatically load buffers from last session
+
+;;(setq history-length 50)
+
+;;(add-to-list 'desktop-globals-to-save 'file-name-history) ;; also save file history
+
+;; Things not to include in desktop
+;; (delete 'file-name-history desktop-globals-to-save
+
+;; (setq desktop-restore-frames nil)                         ;; Don't save frame and window configuration
+
+;;  (setq desktop-restore-eager 0))                            ;; eagerly restore no buffers; lazy-load all of them
