@@ -252,3 +252,11 @@ function send_slow_multiline() {
    done
 }
 
+
+function mkts() {
+    echo "Initializing new package for Typescript"
+    npm init -y
+    npm i --save-dev typescript @types/node ts-node nodemon
+    npx tsc --init
+    # npx tsc --init --rootDir src --outDir lib --esModuleInterop --resolveJsonModule --lib es6,dom  --module commonjs
+}

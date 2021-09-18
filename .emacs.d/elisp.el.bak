@@ -1,75 +1,6 @@
-* Introduction
-
-This file contains live code evaluated when Emacs startups up.  Yes,
-Virginia, it's literate programming.
-
-Originally, I kept everything in my .emacs file.  After years, it kept
-getting more and more unwieldy.  Then, through a variety of
-circumstances, I ended up with only lightly customized Emacsen for
-years.  Pity.  But over the past couple of years (starting in the late
-'00s), I decided to take a new tack.  Instead of a monolithic .emacs
-file, I'd do everything in an org mode file.
-
-#+BEGIN_SRC emacs-lisp
-  
   (message "Starting elisp.org.   The adventure begins!")
 
   (setq warning-suppress-types nil)
-  (setq-default bidi-inhibit-bpa t)
-
-;; (setq-default bidi-display-reordering nil) 
-  
-#+END_SRC
-
-To edit an inline Elisp section, type C-c '.
-
-This file was updated for a few years in late '00s / early '10s.  I
-integrated an old version of the file my rebooted .emacs file (using
-package manager and use-package) in 2017.  I know... you probably
-don't care, but I like remember these things.  And some of the files
-were in a source repo where I am unsure of where the history is...
-
-** Todo
-
-- [ ] move to FuraCode or JetBrains Mono if possible?
-- [ ] simplify task bar!   remove some of the bling.
-- [X] Nordic color scheme?
-
-** Things I'm Still Learning (or re-learning)
-
-M-;   - comment-dwim (2012-11-22)
-
-** Profiling
-
-Sometimes, you end up going a little too far.  And your .emacs file ends up taking way, way too long to load.
-
-https://oremacs.com/2015/02/24/emacs-speed-test/
-
-* Package Management
-
-Now, let's try to get include packages we care about...  We use
-use-package, because it's totally awesome!  (Where have you been all
-my life!)
-
-Because a lot minor modes are just so much visual noise, we use
-"diminish" mode to suppress them.
-
-See here: https://www.emacswiki.org/emacs/DiminishedModes
-
-Elpa and stuff.
-
-M-x package-refresh-contents
-M-x package-list-packages-no-fetch
-
-  i   install
-  U   upgrade
-  x   do-it / execute
-
-We have to move the package initialization code into my base .emacs
-file, otherwise we end up loading a version of org mode that is way
-too old.
-
-#+BEGIN_SRC emacs-lisp
 
 ;; Bootstrap 'use-package'
 (unless (package-installed-p 'use-package)
@@ -91,21 +22,6 @@ too old.
   (setq paradox-automatically-star t)
   (setq paradox-github-token "314c9b4fcc85400e10213b4f976f55a944412401"))
 
-#+END_SRC
-
-Now, let's load up a ton of packages.  Really... these were dumped
-here from my ~/.emacs file.  I should refactor it at some point, and
-continue integrating with my legacy elisp.org file.
-
-* Experimental things
-
-Things to look at:
-- http://ergoemacs.org/emacs/elisp_run_current_file.html
-- https://github.com/yuya373/emacs-slack
-- https://www.emacswiki.org/emacs/InternetRelayChat
-
-
-#+BEGIN_SRC emacs-lisp
 ;; todo:
 ;; - groovy
 ;; - gradle
@@ -325,23 +241,8 @@ Things to look at:
 (use-package restclient
   :defer t)
 
-#+END_SRC
-
-https://github.com/JAremko/docker-emacs
-
-* System settings
-
-#+BEGIN_SRC emacs-lisp
-  
   (message "System settings")
-  
-#+END_SRC
 
-** Misc Settings
-
-Set the "exec-path", which is used when starting up external applications.
-
-#+BEGIN_SRC emacs-lisp
   (add-to-list 'exec-path "/opt/local/bin")
   (add-to-list 'exec-path "/usr/local/bin")
     
@@ -358,20 +259,8 @@ Set the "exec-path", which is used when starting up external applications.
   ;;
   (setq global-auto-revert-mode t)
   (setq auto-revert-verbose nil)
-      
-#+END_SRC
-
-** Emacs Server
-
-#+BEGIN_SRC emacs-lisp
 
 (server-start 1)                                          ;; Emacs server (so I can use emacsclient)
-
-#+END_SRC
-
-** Other
-
-#+BEGIN_SRC emacs-lisp
 
   (put 'set-goal-column 'disabled nil)
   (put 'narrow-to-region 'disabled nil)
@@ -388,23 +277,11 @@ Set the "exec-path", which is used when starting up external applications.
   ;;(setq iswitchb-buffer-ignore '("^ " "\\*Buffer" "\\*Minibuf-" "\\*Completions"))
   ;;temp;;(show-paren-mode 1)              ;; show matching parens
 
-#+END_SRC
-
-** Editing tweaks
-
-#+BEGIN_SRC emacs-lisp
-
   ;; Be able to edit forms from Chrome
   (use-package edit-server
     :defer t
     :config
     (edit-server-start))
-
-#+END_SRC
-
-** Completing tweaks
-
-#+BEGIN_SRC emacs-lisp
 
   ;; COMPlete ANYthing
   (use-package company
@@ -414,12 +291,6 @@ Set the "exec-path", which is used when starting up external applications.
     (add-hook 'after-init-hook 'global-company-mode))
 
 ;;  (add-hook 'after-init-hook 'global-company-mode)
-
-#+END_SRC
-
-** Backups
-
-#+BEGIN_SRC emacs-lisp
 
   ;; see http://www.emacswiki.org/emacs/ForceBackups
 
@@ -446,12 +317,6 @@ Set the "exec-path", which is used when starting up external applications.
   ;; 
   ;; (add-hook 'before-save-hook  'force-backup-of-buffer)
 
-#+END_SRC
-
-** Spell checking
-
-#+BEGIN_SRC emacs-lisp
-
 ;; switch to aspell, since we don't have ispell...
 
 (setq ispell-program-name "aspell")
@@ -464,28 +329,9 @@ Set the "exec-path", which is used when starting up external applications.
 ;;(dolist (hook '(org-mode-hook))
 ;;  (add-hook hook (lambda () (flyspell-mode -1))))
 
-#+END_SRC
-
-** Winner Mode
-
-http://www.emacswiki.org/emacs/WinnerMode
-
-C-c left and C-c right to return to previous window layouts.
-
-#+BEGIN_SRC emacs-lisp
-
 (use-package winner
   :defer t)
 
-#+END_SRC
-
-** Undo tree
-
-Visual, more intuitive undo / redo without losing Emacs' branching
-undo behavior...
-
-#+BEGIN_SRC emacs-lisp
-    
 ;; Visual Undo and change key bindings.  (C-z == minimize window by default!?  Rather make it undo!)
   (use-package undo-tree
     :defer t
@@ -496,12 +342,6 @@ undo behavior...
     :bind
     (("C-z" . undo)
      ("C-S-Z" . redo)))
-    
-#+END_SRC
-
-** Appearance: colors, themes, UI
-
-#+BEGIN_SRC emacs-lisp
 
 ;;
 ;; Tweak the UI
@@ -639,14 +479,6 @@ undo behavior...
   (menu-bar-mode -1)
   (fringe-mode nil)    ;; indent of text on left and right...
 
-#+END_SRC
-
-* Text handling
-
-First, we tweak a number of Emacs defaults to our liking.  Then, we specify, and configure, various text-specific modes.
-
-#+BEGIN_SRC emacs-lisp
-  
   (message "Text handling")
   
   ;;;(autoload 'longlines-mode "longlines.el" "Minor mode for editing long lines." t)
@@ -662,25 +494,6 @@ First, we tweak a number of Emacs defaults to our liking.  Then, we specify, and
   (put 'upcase-region 'disabled nil)                        ;; I prefer being able to upcase region
   (put 'downcase-region 'disabled nil)                      ;;  and lowercase region..
 
-#+END_SRC
-
-** Auto indent
-
-Decided to try auto-indent mode
-([[http://www.emacswiki.org/emacs/AutoIndentMode]])
-
-yes: Return automatically indents the code appropriately (if enabled)
-Pasting/Yanking indents the appropriately
-yes: Killing line will take off unneeded spaces (if enabled)
-maybe: On visit file, indent appropriately, but DONT SAVE. (Pretend like nothing happened, if enabled)
-maybe: On save, optionally unttabify, remove trailing white-spaces, and definitely indent the file (if enabled).
-TextMate behavior of keys if desired (see below)
-maybe: Deleting the end of a line will shrink the whitespace to just one (if desired and enabled)
-maybe: Automatically indent balanced parenthetical expression, or sexp, if desired auto-indent-current-pairs or auto-indent-next-pair is set to be true (disabled by default). This is not immediate but occurs after a bit to allow better responsiveness in emacs.
-Attempts to set the indentation level (number of spaces for an indent) for a major-mode.
-
-#+BEGIN_SRC emacs-lisp
-
   ;; M-Return goes to end of line, inserts semicolon, and inserts return
   (setq auto-indent-key-for-end-of-line-insert-char-then-newline "<M-return>")
 
@@ -694,32 +507,12 @@ Attempts to set the indentation level (number of spaces for an indent) for a maj
 ;;      ;; (setq auto-indent-on-visit-file t)
 ;;      (auto-indent-global-mode))
 
-#+END_SRC
-
-** Hideshow
-
-For text folding.  We also add on fold-dwim so we have consistent interface...
-
-#+BEGIN_SRC emacs-lisp
-
 (use-package yafolding :defer t)
-  
-#+END_SRC
-
-** Generic Programming Language functionality
-
-#+BEGIN_SRC emacs-lisp
 
 (use-package editorconfig
   :ensure t
   :config
   (editorconfig-mode 1))
-
-#+END_SRC
-
-** Org mode (woo-hoo)   :review:
-
-#+BEGIN_SRC emacs-lisp
 
 ;;  (define-obsolete-function-alias 'org-define-error 'define-error)
 
@@ -777,34 +570,13 @@ For text folding.  We also add on fold-dwim so we have consistent interface...
      :config
      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
-#+END_SRC
-
-#+RESULTS:
-: t
-
-* Development
-
-#+BEGIN_SRC emacs-lisp
-  
   (message "Development")
-
-#+END_SRC
-
-** Source control: Git
-
-#+BEGIN_SRC emacs-lisp
 
   (use-package git-commit
      :defer t)
 
   (use-package magit
      :bind (("C-x g" . magit-status)))
-
-#+END_SRC
-
-** Flycheck
-
-#+BEGIN_SRC emacs-lisp
 
   ;;
   ;; Flycheck - lightweight syntax checking.  For other languages:
@@ -821,37 +593,6 @@ For text folding.  We also add on fold-dwim so we have consistent interface...
 
   ;; flycheck-clojure
 
-#+END_SRC
-
-** Clojure
-
-Useful key bindings:
-
-    C-c C-k compile the current file
-    M-. to jump to a definition
-    C-c M-p to change the namespace of the repl session.
-
-    C-x e to eval sexp
-    
-
-    Midje mode (from https://github.com/marick/Midje/wiki/Midje-mode):
-
-    C-c , Within a fact, this sends the fact to the REPL and inserts
-    the results just above the fact. Within a defn, this compiles the
-    defn and then rechecks the last-checked fact.
-
-    C-c h, C-c s
-    The first form "hides" all facts by condensing them down to a
-    single line. The second expands them all.
-
-
-    C-c f
-    This "focuses" your attention on a single fact by hiding all other facts.
-    
-Clojure!
-   
-    
-#+BEGIN_SRC emacs-lisp
   ;;
   ;; Clojure!
   ;;
@@ -868,69 +609,12 @@ Clojure!
      :defer t
      :config
      (add-hook 'clojure-mode-hook 'parinfer-mode))
-  
-#+END_SRC
 
-** Java  :disabled:
-
-port these over to C
-
-#+BEGIN_SRC
-  (defun my-java-mode-hook()
-    "Hook for running Java files"
-    (message "Loading my-java-hook...")
-    (c-toggle-auto-newline +1)                        ;; caused auto-newline
-    (setq tab-width 4)                                ;; this is terrible, horrible, and default for people using Eclipse <sigh>
-    (setq fill-column 100)                            ;; crank this up just to give people fits! :)
-    (hs-hide-level 2)                                 ;; by default, hide everything inside a class?
-    (flyspell-prog-mode)                              ;; spell check comments...
-    (local-set-key (kbd "RET") 'newline-and-indent)   ;; newline and indent
-    ;(local-set-key [(control return)] 'semantic-ia-complete-symbol)  ;; intillisense-type thing ; may want to make more aggressive?
-                                                       ;;  maybe change it to be like dabbrev ; or fallback on dabbrev?
-    ;(local-set-key "." 'semantic-complete-self-insert) ;; when we type a ".", do intellisense
-    ;; don't indent braces
-    (c-set-offset 'substatement-open 0))
-  
-  ;; c-hanging-braces-alist
-  ;; (substatement-open . (after))     to do hanging braces, e.g.   if (blah) {<newline>
-  ;;  For example, the default value of c-hanging-braces-alist is:
-  ;;
-  ;;          ((brace-list-open)
-  ;;           (brace-entry-open)
-  ;;           (statement-cont)
-  ;;           (substatement-open after)
-  ;;           (block-close . c-snug-do-while)
-  ;;           (extern-lang-open after)
-  ;;           (namespace-open after)
-  ;;           (module-open after)
-  ;;           (composition-open after)
-  ;;           (inexpr-class-open after)
-  ;;           (inexpr-class-close before))
-  
-  (add-hook 'java-mode-hook     'my-java-mode-hook)
-  
-  ;; try flymake...
-  
-  ;;(require 'flymake)
-  ;;(add-hook 'java-mode-hook 'flymake-mode-on)
-  
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-  
   (use-package gradle-mode
     :defer t
     :config
     (gradle-mode 1))
 
-#+END_SRC
-
-** Javascript
-
-Better Javascript mode.
-
-#+BEGIN_SRC emacs-lisp
-  
   ;;
   ;; Javascript!
   ;;
@@ -943,43 +627,6 @@ Better Javascript mode.
   ;;   (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . js2-jsx-mode))
   ;;   (add-to-list 'interpreter-mode-alist '("node" . js2-jsx-mode))
 
-
-#+END_SRC
-
-** eshell                                                         :disabled:
-
-For setup, symlink ~/.eshell to ~/src/my/dotfiles/eshell
-
-Key sequences:
-
-C-c M-b - inserts printed buffer name
-
-Aliases:
-p - pushd
-, - popd
-d - dirs
-o - open
-
-todo : http://www.emacswiki.org/emacs/EshellScreen
-
-why doesn't smart complete work?
-
-#+BEGIN_SRC
-  ;; http://www.masteringemacs.org/articles/2010/12/13/complete-guide-mastering-eshell/
-  
-  (require 'eshell)
-  (require 'em-smart)
-  (setq eshell-where-to-jump 'begin)
-  (setq eshell-review-quick-commands nil)
-  (setq eshell-smart-space-goes-to-end t)
-  (setq eshell-save-history-on-exit t)
-
-#+END_SRC
-
-//-*- mode: groovy -*-
-
-#+BEGIN_SRC emacs-lisp
-
 ;;(use-package vterm
 ;;    :ensure t)
 
@@ -991,16 +638,6 @@ why doesn't smart complete work?
     :load-path  "~/Software/emacs-libvterm/"))
 
 ;; todo : bind vterm or eshell to key sequence
-
-#+END_SRC
-
-** Code display enhancements
-
-Sometimes, we want to tweak the way code is displayed.  For example,
-instead of the string "lambda", we want to see the character lambda.
-Especially for languages with closures.
-
-#+BEGIN_SRC emacs-lisp
 
   (global-prettify-symbols-mode 1)
 
@@ -1027,12 +664,6 @@ Especially for languages with closures.
   (add-hook 'shen-mode-hook 'my-add-pretty-lambda)
   (add-hook 'tex-mode-hook 'my-add-pretty-lambda)
 
-#+END_SRC
-
-** Misc Code-related tweaks
-
-#+BEGIN_SRC emacs-lisp
-
   ;;
   ;; Various packages
   ;;
@@ -1053,28 +684,10 @@ Especially for languages with closures.
   (column-number-mode 1)
   ;; (display-time-mode 1)    ;; This shows time, load average, and mail status.
 
-#+END_SRC
-
-* Communications, web, networking
-
-#+BEGIN_SRC emacs-lisp
-  
   (message "Communications, web, networking")
-  
-#+END_SRC
 
-* Functions
-
-#+BEGIN_SRC emacs-lisp
-  
   (message "Function")
-  
-#+END_SRC
 
-
-Various random functions I've written or swiped from elsewhere.
-
-#+BEGIN_SRC emacs-lisp
   ;; deprecated
   ;;  (defun mac-toggle-max-window ()
   ;;    (interactive)
@@ -1141,38 +754,9 @@ Various random functions I've written or swiped from elsewhere.
   ;;     (select-frame (make-frame))
   ;;     (color-theme-monokai-terminal)
   ;;     (shell-mode))
-#+END_SRC
 
-* Keybindings  :disabled:
-
-#+BEGIN_SRC emacs-lisp
-  
   (message "Keybindings")
-  
-#+END_SRC
 
-
-Various global keybindings.  (Run after everything is loaded.)
-
-Looking thru existing map, I see some stuff is defined that I didn't realize.
-
-| f1     | help                                 |
-| f2     | 2 cols mode ; kinda useless to me... |
-| f3     | start macro                          |
-| f4     | end or call macro                    |
-| f5     | toggle hideshow (me)                 |
-| f6, f7 | unused and won't conflict on Mac...  |
-
-"The EmacsManual says that the combination of C-c followed by a plain
-letter, and the function keys f5 through f9 are reserved for
-users. That means that you can expect that no other mode ever uses
-these -- it does not mean that you are limited to these, however. You
-can of course rebind any key you want. See, for instance,
-Lisp:unbound.el, which finds keys not already in use."
-
-(define-key global-map (kbd "C-x |") 'split-window-horizontally)
-
-#+BEGIN_SRC emacs-lisp
 ;; (define-key global-map [(alt return)] 'mac-toggle-max-window)
 ;; (define-key global-map [(alt return)] 'ns-toggle-fullscreen)
 (global-set-key [(meta h)] 'ns-do-hide-emacs)
@@ -1201,52 +785,8 @@ Lisp:unbound.el, which finds keys not already in use."
 
 ;;(global-set-key "\C-cr" 'clojure-jack-in) ;; xxx should be clojure specific...
 
-#+END_SRC
-
-And here are some experimental bindings I haven't turned on yet:
-
-#+BEGIN_SRC
-;; (global-set-key "\C-w" 'backward-kill-word)
-;; (global-set-key "\C-x\C-k" 'kill-region)
-;; (global-set-key "\C-c\C-k" 'kill-region)
-#+END_SRC
-
-* Scratch  :disabled:
-
-To be refactored...
-
-#+BEGIN_SRC
-
-; clean-buffer-list from midnight-hook
-
-;;;
-;;; colors
-;;;
-; turn on Mac keys; turned this off after killing a buffer accidentally...
-;;;(require 'redo)
-;;;(require 'mac-key-mode)
-;;;(mac-key-mode 1)
-;;;(mac-key-mode 0)
-
-
-;; YASnippet
-
-; (require 'yasnippet)
-; (yas/initialize)
-; (yas/load-directory "~/src/elisp/yasnippet/snippets")
-
-#+END_SRC
-
-* Final tasks
-
-#+BEGIN_SRC emacs-lisp
-  
   (message "At the end")
-  
-#+END_SRC
 
-
-#+BEGIN_SRC emacs-lisp
   ;; https://www.emacswiki.org/emacs/Desktop
   ;; to fix stale locks issue (hopefully)
   (defun sylvain/desktop-owner-advice (original &rest args)
@@ -1303,30 +843,6 @@ To be refactored...
   ;;
   ;;temp;;(require 'midnight)
   ;; (midnight-delay-set 'midnight-delay "4:30am")
-  
-#+END_SRC
-
-* Examples
-
-Things I can do:
-
-#+BEGIN_EXAMPLE
-
-/* For the emacs weenies in the crowd.
-Local Variables:
-   c-basic-offset: 2
-End:
-*/
-
-#+END_EXAMPLE
-
-will set variable in a file.
-
-* Prologue
-
-Stuff to run at the very very end...
-
-#+BEGIN_SRC emacs-lisp
 
 ;;(message "My .emacs loaded in %ds" (destructuring-bind (hi lo ms ps) (current-time)
 ;;                           (- (+ hi lo) (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
@@ -1335,7 +851,3 @@ Stuff to run at the very very end...
    (message (concat "My .emacs loaded in " (emacs-init-time) " seconds.")))
 
 (add-hook 'emacs-startup-hook 'startup-time)
-
-#+END_SRC
-
-

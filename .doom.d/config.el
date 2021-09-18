@@ -69,10 +69,13 @@
    (setq mac-option-modifier 'super)
    (message "Darwin"))))
 
-;; (setq mac-option-key-is-meta t)
-;; (setq mac-option-modifier 'alt)
-;;    (setq mac-command-modifier 'meta)
+(set-frame-parameter (selected-frame) 'alpha '(97 . 97))
 
+;; There is also a mac-right-option-modifier setting. I could change that to
+;; Hyper? Would it be possible to change the doom prefix to Hyber?
+;;
+;; (setq mac-option-key-is-meta t)
+;; (setq mac-right-option-modifier nil)
 
 ;; set custom keysequences
 
