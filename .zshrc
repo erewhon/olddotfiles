@@ -35,7 +35,14 @@ if [[ -o login ]]; then
     if ! cmp -s ~/.last_neofetch <( echo $NOW )
     then
         echo $NOW > ~/.last_neofetch
-        command -v neofetch >/dev/null 2>&1 && neofetch --iterm2 ~/Documents/Pictures/Backgrounds/Unsplash/
+
+        if command -v neofetch 2>&1 > /dev/null; then
+            if [[ -z "$TMUX" ]]; then
+                neofetch --iterm2 $HOME/Documents/Pictures/Backgrounds/Unsplash/
+            else
+                neofetch
+            fi
+        fi
     else
         # do nothing...   nice and clean!
         
@@ -206,9 +213,17 @@ fi
 
 
 if command -v exa 1>/dev/null 2>&1; then
-    alias ll='exa -abghHl --time-style=long-iso --git'
-    alias lll='exa -abghHl --time-style=long-iso --extended --git'
-    alias tree='exa -abghHl --time-style=long-iso --tree --level=3'
+    unalias ll
+
+    function ll() {
+        exa -abghHl --time-style=long-iso --git --color=always "$@" | bat --style=plain
+    }
+
+    function lll() {
+        exa -abghHl --time-style=long-iso --extended --git --color=always "$@" | bat --style=plain
+    }
+
+    alias tree='exa -abghHl --time-style=long-iso --tree --level=3 --color=always'
 fi
 
 if command -v zoxide 1>/dev/null 2>&1; then

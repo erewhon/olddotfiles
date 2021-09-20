@@ -61,7 +61,7 @@ if command -v fzf &> /dev/null; then
         }
 
     # git history preview
-    alias ghp="git log --oneline | fzf --multi --preview 'git show {+1}'"
+    alias ghp="git log --oneline | fzf --multi --preview 'git show {+1} | bat --style=full --color=always'"
 
     function gdp() {
         preview="git diff $@ --color=always -- {-1}"
