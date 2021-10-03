@@ -20,7 +20,7 @@ if [[ "${os_name}" == "Darwin" ]]; then
     fi
 else
     # For Linux and others, we add /usr/local/bin and /usr/local/sbin unconditionally
-    export PATH="/usr/local/bin:/usr/local/sbin${PATH+:$PATH}";
+    export PATH="/usr/local/opt/python-3.9.7/bin:/usr/local/bin:/usr/local/sbin${PATH+:$PATH}";
 fi
 
 #
@@ -91,6 +91,7 @@ path=(~/bin               # link to ~/.dotfiles/bin
       ~/bin.local         # deprecate / consolidate
       ~/.cargo/bin
       ~/.local/bin        # local binaries
+      /usr/local/opt/python-3.9.7/bin
       ~/Library/Python/3.9/bin
       # /usr/local/bin
       # /usr/local/sbin
