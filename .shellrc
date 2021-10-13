@@ -116,6 +116,9 @@ function fjwt() {
   done
 }
 
+function tailf() {
+    tail -f "$@" | bat --paging=never -l log
+}
 
 #.# Better Git Logs.
 ### Using EMOJI-LOG (https://github.com/ahmadawais/Emoji-Log).
